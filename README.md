@@ -1,5 +1,5 @@
 # react-native-redux-zhihudaily
-使用react-native和redux重构的知乎日报
+使用react-native和redux重构的知乎日报，
 本项目兼容ios版本，但界面只依照知乎日报Android端编写
 
 ## Preview
@@ -14,7 +14,13 @@ npm install # install dependencies
 npm run android # enjoy it
 ```
 
+## Debug
+
+连接开发服务器参考
+[ReactNative从设备上访问开发服务器](http://zevenfang.github.io/2016/06/22/ReactNative从设备上访问开发服务器/)
+
 ## Todos
 - [ ] 夜间模式
 - [ ] 关注主题日报
 - [ ] 文章评论列表
+- [ ] 使用Codepush
