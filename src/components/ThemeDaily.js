@@ -64,12 +64,13 @@ export default class ThemeDaily extends Component {
 
   render() {
 
-    //打开侧边栏，黑色阴影背景
     let {zhihu,refreshThemeArticles} = this.props;
+    let img = require('../img/splash_black.png');
 
     //文章列表
     let list = null;
-    if (zhihu.themeDaily.stories) {
+    if (zhihu.themeDaily&&zhihu.themeDaily.stories) {
+      img = {uri:zhihu.themeDaily.background};
       this.ds = this.ds.cloneWithRows(zhihu.themeDaily.stories);
       list = (
         <ListView
@@ -78,6 +79,9 @@ export default class ThemeDaily extends Component {
           style={{marginBottom:6}}
         />
       )
+    } else{
+      zhihu.themeDaily = {};
+      zhihu.themeDaily.editors = [];
     }
 
     return (
@@ -99,7 +103,7 @@ export default class ThemeDaily extends Component {
               progressBackgroundColor="#fff"
             />
           }>
-          <Image source={{uri:zhihu.themeDaily.background}} style={{height:240}} resizeMode="cover">
+          <Image source={img} style={{height:240,backgroundColor:'#333'}} resizeMode="cover">
             <Text style={styles.title}>{zhihu.themeDaily.description}</Text>
           </Image>
           <Touch onPress={()=>{this.props.onNavigate({type:'push',key:'editors'})}}>

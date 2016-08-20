@@ -105,17 +105,22 @@ export function fetchThemeDailyList() {
 export function fetchArticlesByTheme(themeId) {
   return (dispatch,getState) => {
     let {routes} = getState();
+    if (routes.children[routes.children.length-1].key!='theme_daily')
+      dispatch({
+        type: 'push',
+        key: 'theme_daily'
+      });
+    dispatch({
+      type: 'fetchArticlesByTheme',
+      themeId,
+      themeDaily: {}
+    });
     Http.get('theme/'+themeId).then(function (d) {
       dispatch({
         type: 'fetchArticlesByTheme',
         themeId,
         themeDaily: d
       });
-      if (routes.children[routes.children.length-1].key!='theme_daily')
-        dispatch({
-          type: 'push',
-          key: 'theme_daily'
-        })
     })
   }
 }
@@ -161,26 +166,12 @@ export function setTitle(title) {
   }
 }
 
-export function toggleDrawer() {
-  return {
-    type:'toggleDrawer'
-  }
-}
-
-/*export function backToHome() {
+export function backToHome() {
   return (dispatch,getState) => {
     let {routes} = getState();
-    
-    if (routes.children[routes.children.length-1].key!='home')
+    if (routes.children[routes.children.length-1].key=='theme_daily')
       dispatch({
         type: 'pop'
-      })
-  }
-}*/
-
-export function contentSizeChange(size) {
-  return {
-    type:'contentSizeChange',
-    size:size
+      });
   }
 }

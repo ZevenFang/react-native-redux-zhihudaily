@@ -1,6 +1,6 @@
 const initialState = {
   splash: { //默认闪屏界面
-    img: require('../img/splash.png'),
+    img: require('../img/splash_black.png'),
     text: '每天三次，每次七分钟'
   },
   isDrawerOpened:false,
@@ -56,14 +56,6 @@ const actionsMap = {
   },
   setTitle(state,action){
     state.title = action.title;
-    return {...state}
-  },
-  toggleDrawer(state){
-    state.isDrawerOpened = !state.isDrawerOpened;
-    return {...state}
-  },
-  contentSizeChange(state,action){
-    state.contentSize = action.size;
     return {...state}
   }
 };

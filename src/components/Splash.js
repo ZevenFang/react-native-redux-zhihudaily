@@ -41,6 +41,7 @@ export default class Splash extends Component {
         <Animated.Image
           source={splash.img}
           style={{
+            backgroundColor:'#333',
             flex: 1,
             width: this.WINDOW_WIDTH,
             height: this.WINDOW_HEIGHT,

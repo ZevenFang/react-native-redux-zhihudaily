@@ -40,7 +40,7 @@ export default class Editors extends Component {
     this.ds = this.ds.cloneWithRows(this.props.zhihu.themeDaily.editors);
     return (
       <View style={styles.container}>
-        <CustomBackTitle title="主编" left={-270} onNavigate={this.props.onNavigate}/>
+        <CustomBackTitle title="主编" left={-260} onNavigate={this.props.onNavigate}/>
         <ListView
           dataSource={this.ds}
           renderRow={this._renderRow}
