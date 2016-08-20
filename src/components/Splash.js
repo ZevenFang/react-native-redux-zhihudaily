@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image,StyleSheet,Dimensions,View,Animated,Text} from 'react-native';
+import {Image,StyleSheet,Dimensions,View,Animated,Text,StatusBar} from 'react-native';
 
 export default class Splash extends Component {
 
@@ -38,6 +38,7 @@ export default class Splash extends Component {
     // img = require('image!splash');
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="#333"/>
         <Animated.Image
           source={splash.img}
           style={{

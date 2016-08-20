@@ -117,6 +117,7 @@ export default class Home extends Component {
         <Text style={styles.subtitle}>今日热闻</Text>
         {list}
       </ScrollView>
+      {/*<View style={{position:'absolute',right:5,top:30,height:95,width:195,backgroundColor:'#eee'}}/>*/}
     </DrawerLayout>
     );
   }

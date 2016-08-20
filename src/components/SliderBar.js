@@ -64,9 +64,6 @@ export default class SliderBar extends Component {
     )
   };
 
-  backToHome() {
-  }
-  
   render() {
     let list = null;
     if (this.props.zhihu.themeList) {
@@ -107,7 +104,7 @@ export default class SliderBar extends Component {
           </View>
         </View>
         {/*Come back to home*/}
-        <Touch onPress={()=>this.props.backToHome()}>
+        <Touch onPress={()=>{this.props.backToHome();this.props.closeDrawer()}}>
           <View style={styles.homeBtn}>
             <View style={{flex:.15}}><Image style={{width:20,height:20}} source={require('../img/menu_home.png')}/></View>
             <View style={{flex:.85}}><Text style={{color:'#00a2ed',fontSize:16}}>首页</Text></View>

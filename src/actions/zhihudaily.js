@@ -9,17 +9,20 @@ export function fetchSplash() {
   return dispatch => {
     Http.get('start-image/1080*1776').then(function (d) {
       d.img = {uri:d.img};
-      dispatch({
-        type: 'fetchSplash',
-        splash: d
-      });
+      //展示1秒黑屏
+      setTimeout(function () {
+        dispatch({
+          type: 'fetchSplash',
+          splash: d
+        });
+      },1000);
       //停顿2秒后进入首页
       setTimeout(function () {
         dispatch({
           type: 'push',
           key: 'home'
         });
-      },2000)
+      },3000)
     },function () {
       Toast.show('请检查网络后重试');
     })
