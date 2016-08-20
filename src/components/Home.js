@@ -78,7 +78,7 @@ export default class Home extends Component {
     else if (y >= 240 && title != '今日热闻' && (this.pos.length == 0 || y <= this.pos[0][0])) {
       props.setTitle('今日热闻');
     }
-    else if (content == height + y) {
+    else if (content == height + y) { // 判断是否下拉到底
       let date = new Date(+this.now-24*60*60*1000 * (this.pos.length+1));
       let dateText = DateUtil.getDateText(date);
       this.pos.push([content,dateText]);
