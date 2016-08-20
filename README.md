@@ -3,9 +3,9 @@
 本项目兼容ios版本，但界面只依照知乎日报Android端
 
 ## Preview
-Android preview
+### Android preview
 ![Android version](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/android.gif)
-Work with redux
+### Work with redux
 ![Redux](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/redux.png)
 
 ## Getting started
