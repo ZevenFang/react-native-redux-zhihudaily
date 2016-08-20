@@ -94,6 +94,18 @@ export function refreshArticles() {
   }
 }
 
+export function fetchArticleBefore(dateText,before) {
+  return dispatch => {
+    Http.get('news/before/'+before).then(function (d) {
+      dispatch({
+        type:'fetchArticleBefore',
+        stories: d.stories,
+        dateText
+      })
+    })
+  };
+}
+
 export function fetchThemeDailyList() {
   return dispatch => {
     Http.get('themes').then(function (d) {
@@ -153,12 +165,6 @@ export function showEditorHome(id) {
       type: 'push',
       key: 'editor'
     })
-  }
-}
-
-export function fetchArticleBefore() {
-  return {
-    type:'fetchArticleBefore'
   }
 }
 

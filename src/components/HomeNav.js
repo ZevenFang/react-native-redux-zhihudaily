@@ -11,10 +11,6 @@ const styles = StyleSheet.create({
     height: 50,
     paddingLeft: 0
   },
-  title: {
-    color: '#rgba(255, 255, 255, 1)',
-    left: -70
-  },
   buttonText: {
     color: '#rgba(255, 255, 255, 1)'
   },
@@ -43,6 +39,12 @@ export default class HomeNav extends Component {
   };
 
   render() {
+    let title = {
+        color: '#rgba(255, 255, 255, 1)',
+        left: -70
+    };
+    if (this.props.zhihu.title.length==4) title.left = -55;
+    else if (this.props.zhihu.title.length>4) title.left = -30;
     return (
       <NavBar style={styles}>
         <NavButton style={styles.navButton} onPress={()=>{this.handleDrawer(this.props)}}>
@@ -50,7 +52,7 @@ export default class HomeNav extends Component {
             <Image style={styles.icon} source={require('../img/ic_menu_white.png')} resizeMode={'contain'}/>
           </NavButtonText>
         </NavButton>
-        <NavTitle style={styles.title}>
+        <NavTitle style={title}>
           {this.props.zhihu.title}
         </NavTitle>
         <NavGroup>

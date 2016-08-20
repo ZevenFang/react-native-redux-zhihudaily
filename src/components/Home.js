@@ -15,6 +15,8 @@ import DrawerLayout from 'react-native-drawer-layout';
 import Swiper from './Swiper';
 import {Grid,Col,Row} from 'react-native-easy-grid';
 import Touch from '../utils/Touch';
+import DateUtil from '../utils/DateUtil';
+import Toast from 'react-native-root-toast';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -26,7 +28,7 @@ const height = Dimensions.get('window').height;
 export default class Home extends Component {
 
   pos = [];
-  now = {};
+  now = null;
 
   constructor(props) {
     super(props);
@@ -38,7 +40,7 @@ export default class Home extends Component {
   }
 
   closeDrawer = () => {
-    this._drawer.closeDrawer()
+    this._drawer.closeDrawer();
   };
 
   openDrawer = () => {
@@ -46,6 +48,7 @@ export default class Home extends Component {
   };
 
   _renderRow = row => {
+    if (row.subtitle) return <Text style={styles.subtitle}>{row.subtitle}</Text>;
     let multipicShadow = null;
     if (row.multipic) multipicShadow = <View style={{marginTop:60,marginLeft:55,width:30,height:15,backgroundColor:'#000',opacity:0.5,justifyContent:'center'}}><Text style={{color:'white',fontSize:12,textAlign:'center'}}>多图</Text></View>;
     return(
@@ -64,17 +67,27 @@ export default class Home extends Component {
     )
   };
 
-  _onScroll(e,props){
+  _onScroll(e,props){ // 动态切换标题
     let y = e.nativeEvent.contentOffset.y;
+    let height = e.nativeEvent.layoutMeasurement.height;
+    let content = e.nativeEvent.contentSize.height;
     let title = props.zhihu.title;
     // console.warn(e.nativeEvent.contentOffset.y);
-    if (y<240&&title!='首页')
+    if (y < 240 && title != '首页')
       props.setTitle('首页');
-    else if (y>=240&&title!='今日热闻')
+    else if (y >= 240 && title != '今日热闻' && (this.pos.length == 0 || y <= this.pos[0][0])) {
       props.setTitle('今日热闻');
-    if (y+518==props.zhihu.contentSize) {
-      props.fetchArticleBefore();
-      console.warn('scrollToBottom');
+    }
+    else if (content == height + y) {
+      let date = new Date(+this.now-24*60*60*1000 * (this.pos.length+1));
+      let dateText = DateUtil.getDateText(date);
+      this.pos.push([content,dateText]);
+      this.props.fetchArticleBefore(dateText,DateUtil.getBeforeText(date));
+    } else {
+      for (let i=0;i<this.pos.length;i++){
+        if (y > this.pos[i][0] && title != this.pos[i][1] && (this.pos.length == i+1 || y <= this.pos[i+1][0]))
+          props.setTitle(this.pos[i][1]);
+      }
     }
   }
 
@@ -95,15 +108,15 @@ export default class Home extends Component {
     }
 
     return (
-    <DrawerLayout
-      ref={(ref) => this._drawer = ref}
-      drawerWidth={300}
-      drawerPosition={DrawerLayout.positions.Left}
-      renderNavigationView={()=><SliderBar {...this.props} closeDrawer={this.closeDrawer}/>}>
-      <HomeNav openDrawer={this.openDrawer} closeDrawer={this.closeDrawer} {...this.props}/>
-      <ScrollView
-        onScroll = {(e)=>{this._onScroll(e,this.props)}}
-        refreshControl={
+      <DrawerLayout
+        ref={(ref) => this._drawer = ref}
+        drawerWidth={300}
+        drawerPosition={DrawerLayout.positions.Left}
+        renderNavigationView={()=><SliderBar {...this.props} closeDrawer={this.closeDrawer}/>}>
+        <HomeNav openDrawer={this.openDrawer} closeDrawer={this.closeDrawer} {...this.props}/>
+        <ScrollView
+          onScroll = {(e)=>{this._onScroll(e,this.props)}}
+          refreshControl={
             <RefreshControl
               refreshing={zhihu.refreshing}
               onRefresh={refreshArticles}
@@ -113,12 +126,11 @@ export default class Home extends Component {
               progressBackgroundColor="#fff"
             />
           }>
-        <Swiper {...this.props}/>
-        <Text style={styles.subtitle}>今日热闻</Text>
-        {list}
-      </ScrollView>
-      {/*<View style={{position:'absolute',right:5,top:30,height:95,width:195,backgroundColor:'#eee'}}/>*/}
-    </DrawerLayout>
+          <Swiper {...this.props}/>
+          {list}
+        </ScrollView>
+        {/*<View style={{position:'absolute',right:5,top:30,height:95,width:195,backgroundColor:'#eee'}}/>*/}
+      </DrawerLayout>
     );
   }
 

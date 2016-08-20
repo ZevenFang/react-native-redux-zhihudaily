@@ -16,15 +16,18 @@ const actionsMap = {
   },
   fetchLatestArticles(state,action){
     state.latest = action.latest;
+    action.latest.stories.unshift({subtitle:'今日热闻'});
     return {...state};
   },
   refreshArticles(state,action){
     state.latest = action.latest;
+    action.latest.stories.unshift({subtitle:'今日热闻'});
     state.refreshing = false;
     return {...state};
   },
   fetchArticleBefore(state,action){
-    state.latest.stories.push(state.latest.stories[0]);
+    state.latest.stories.push({subtitle:action.dateText});
+    state.latest.stories = state.latest.stories.concat(action.stories);
     return {...state};
   },
   fetchThemeDailyList(state,action){
