@@ -1,4 +1,4 @@
-package com.zhihudaily;
+package com.zeven.zhihudaily;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
