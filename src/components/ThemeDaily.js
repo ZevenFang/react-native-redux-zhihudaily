@@ -8,7 +8,8 @@ import {
   Text,
   Image,
   ListView,
-  RefreshControl
+  RefreshControl,
+  Platform
 } from 'react-native';
 import SliderBar from './SliderBar'
 import DrawerLayout from 'react-native-drawer-layout';
@@ -66,7 +67,8 @@ export default class ThemeDaily extends Component {
 
     let {zhihu,refreshThemeArticles} = this.props;
     let img = require('../img/splash_black.png');
-
+    if (Platform.OS==='ios') { img = {uri:zhihu.themeDaily.background}; }
+    
     //文章列表
     let list = null;
     if (zhihu.themeDaily&&zhihu.themeDaily.stories) {
@@ -103,7 +105,7 @@ export default class ThemeDaily extends Component {
               progressBackgroundColor="#fff"
             />
           }>
-          <Image source={img} style={{height:240,backgroundColor:'#333'}} resizeMode="cover">
+          <Image source={img} style={{height:240}} resizeMode="cover">
             <Text style={styles.title}>{zhihu.themeDaily.description}</Text>
           </Image>
           <Touch onPress={()=>{this.props.onNavigate({type:'push',key:'editors'})}}>

@@ -5,6 +5,8 @@
 ## Preview
 ### Android preview
 ![Android version](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/android.gif)
+### IOS preview
+![IOS version](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/ios.gif)
 ### Work with redux
 ![Redux](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/redux.png)
 
@@ -12,12 +14,14 @@
 ```shell
 npm install # install dependencies
 npm run android # enjoy it
+npm run ios # run ios version
 ```
 
 ## Debug
-
-连接开发服务器参考
-[ReactNative从设备上访问开发服务器](http://zevenfang.github.io/2016/06/22/ReactNative从设备上访问开发服务器/)
+###连接开发服务器
+参考[ReactNative从设备上访问开发服务器](http://zevenfang.github.io/2016/06/22/ReactNative从设备上访问开发服务器/)
+###连接Redux调试服务器
+参考[连接Redux调试服务器](http://zevenfang.github.io/2016/08/21/连接Redux调试服务器/)
 
 ## Todos
 - [ ] 夜间模式
