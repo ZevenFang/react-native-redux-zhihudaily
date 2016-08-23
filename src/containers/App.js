@@ -11,6 +11,9 @@ import Editor from './Editor';
 
 import routeReducer from '../reducers/routes';
 
+import '../utils/Storage';
+import '../utils/Theme';
+
 export default class App extends Component {
   renderScene = props => {
     switch (props.scene.key) {

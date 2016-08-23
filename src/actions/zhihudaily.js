@@ -125,11 +125,12 @@ export function fetchArticlesByTheme(themeId) {
         type: 'push',
         key: 'theme_daily'
       });
-    dispatch({
-      type: 'fetchArticlesByTheme',
-      themeId,
-      themeDaily: {}
-    });
+    //清除数据,重新加载
+    /*dispatch({
+     type: 'fetchArticlesByTheme',
+     themeId,
+     themeDaily: {}
+     });*/
     Http.get('theme/'+themeId).then(function (d) {
       dispatch({
         type: 'fetchArticlesByTheme',
