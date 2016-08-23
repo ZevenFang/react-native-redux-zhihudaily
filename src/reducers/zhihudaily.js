@@ -3,7 +3,7 @@ const initialState = {
     img: require('../img/splash_black.png'),
     text: '每天三次，每次七分钟'
   },
-  theme,
+  theme: global.theme,
   isDrawerOpened:false,
   latest:[],
   title:'首页',
