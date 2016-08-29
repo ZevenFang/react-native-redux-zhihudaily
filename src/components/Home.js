@@ -16,7 +16,6 @@ import Swiper from './Swiper';
 import {Grid,Col,Row} from 'react-native-easy-grid';
 import Touch from '../utils/Touch';
 import DateUtil from '../utils/DateUtil';
-import Toast from 'react-native-root-toast';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -119,7 +118,7 @@ export default class Home extends Component {
           refreshControl={
             <RefreshControl
               refreshing={zhihu.refreshing}
-              onRefresh={refreshArticles}
+              onRefresh={() => {let now = zhihu.latest.date;this.now = new Date(now.substring(0,4)+'/'+now.substring(4,6)+'/'+now.substring(6,8));this.pos=[];refreshArticles()}}
               tintColor="grey"
               title="Loading..."
               colors={['#00a2ed', '#a200ed', '#a2ed00']}
