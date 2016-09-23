@@ -11,8 +11,22 @@ import Editor from './Editor';
 
 import routeReducer from '../reducers/routes';
 
+import Theme from '../utils/Theme';
 import '../utils/Storage';
-import '../utils/Theme';
+
+storage.load({
+  key: 'theme'
+}).then(ret => { // 使用保存的主题
+  global.theme = ret.name;
+}).catch(err => { // 如果没有保存的主题，使用默认主题
+  global.theme = Theme.LIGHT;
+  storage.save({ // 储存默认主题
+    key: 'theme',
+    rawData: {
+      name: Theme.LIGHT
+    }
+  });
+});
 
 export default class App extends Component {
   renderScene = props => {

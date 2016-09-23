@@ -105,7 +105,7 @@ export default class ThemeDaily extends Component {
               progressBackgroundColor="#fff"
             />
           }>
-          <Image source={img} style={{height:240}} resizeMode="cover">
+          <Image source={img} style={{height:240,backgroundColor:'#343434'}} resizeMode="cover">
             <Text style={styles.title}>{zhihu.themeDaily.description}</Text>
           </Image>
           <Touch onPress={()=>{this.props.onNavigate({type:'push',key:'editors'})}}>

@@ -3,7 +3,6 @@ const initialState = {
     img: require('../img/splash_black.png'),
     text: '每天三次，每次七分钟'
   },
-  theme: global.theme,
   isDrawerOpened:false,
   latest:[],
   title:'首页',
@@ -12,6 +11,7 @@ const initialState = {
 const actionsMap = {
   fetchSplash(state,action){
     state.splash = action.splash;
+    state.theme = global.theme; //设置主题
     return {...state};
   },
   fetchLatestArticles(state,action){

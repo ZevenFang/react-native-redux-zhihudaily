@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
-import {View,Text,Image,StyleSheet,Dimensions,ListView,StatusBar} from 'react-native';
+import {View,Text,Image,StyleSheet,Dimensions,ListView,StatusBar,Platform} from 'react-native';
 import Touch from '../utils/Touch';
+import Theme from '../utils/Theme';
+
+let _height = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container:{
-    marginTop: 25,
-    height:Dimensions.get('window').height-25,
+    marginTop: Platform.OS=='android'?0:25,
+    height: Platform.OS=='android'?_height:_height-25,
     backgroundColor:'#FAFAFA'
   },
   account:{
@@ -65,6 +68,7 @@ export default class SliderBar extends Component {
   };
 
   render() {
+    let theme = new Theme(this.props.zhihu.theme);
     let list = null;
     if (this.props.zhihu.themeList) {
       this.ds = this.ds.cloneWithRows(this.props.zhihu.themeList);
@@ -77,7 +81,7 @@ export default class SliderBar extends Component {
     }
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor="#2986E2"/>
+        <StatusBar backgroundColor={theme.colors.statusBar}/>
         {/*Account panel*/}
         <View style={styles.account}>
           <View style={{flexDirection:'row'}}>
