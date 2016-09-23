@@ -22,8 +22,9 @@ export default class Root extends Component {
 
   handleNavigation = (action) => {
     const { dispatch } = this.props;
-    dispatch(action);
-  }
+    if(!this.onMainScreen()) //防止双击返回键退回闪屏页面
+      dispatch(action);
+  };
 
   onMainScreen(){
     let routes = this.props.routes.children;
