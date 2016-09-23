@@ -24,7 +24,7 @@ export default class HomeNav extends Component {
         style={styles.toolbar}
         overflowIcon={require('../img/ic_more_white_android.png')}
         titleColor="white"
-        title="首页" />
+        title={this.props.zhihu.title} />
     );
   }
 
