@@ -30,7 +30,7 @@ export default class ThemeDailyNav extends Component {
 }
 
 var toolbarActions = [
-  {title: '关注', icon:require('../img/theme_add.png'), showWithText:false, show: 'always'}
+  {title: '返回', icon:require('../img/theme_add.png'), showWithText:false, show: 'always'}
 ];
 
 var styles = StyleSheet.create({
