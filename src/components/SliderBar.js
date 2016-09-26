@@ -8,7 +8,7 @@ let _height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   container:{
     marginTop: Platform.OS=='android'?0:25,
-    height: Platform.OS=='android'?_height:_height-25,
+    height: _height-25,
     backgroundColor:'#FAFAFA'
   },
   account:{
