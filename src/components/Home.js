@@ -92,7 +92,6 @@ export default class Home extends Component {
 
   render() {
     let {zhihu,refreshArticles} = this.props;
-
     //文章列表
     let list = null;
     if (zhihu.latest.stories) {

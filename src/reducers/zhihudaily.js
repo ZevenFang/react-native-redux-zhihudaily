@@ -34,9 +34,18 @@ const actionsMap = {
     state.themeList = action.themeList;
     return {...state}
   },
+  resetSideBar(state){
+    state.themeList.map(function (i) {
+      i.active = false;
+    });
+    return {...state}
+  },
   fetchArticlesByTheme(state,action){
     state.themeDaily = action.themeDaily;
     state.themeDaily.id = action.themeId;
+    state.themeList.map(function (i) {
+      i.active = action.themeId==i.id;
+    });
     return {...state};
   },
   refreshThemeArticles(state,action){
@@ -59,6 +68,11 @@ const actionsMap = {
   },
   setTitle(state,action){
     state.title = action.title;
+    return {...state}
+  },
+  switchTheme(state,action){
+    state.theme = action.theme;
+    global.theme = action.theme;
     return {...state}
   }
 };

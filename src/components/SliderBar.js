@@ -56,10 +56,10 @@ export default class SliderBar extends Component {
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
   }
 
-  _renderRow = row => {
+  _renderRow = (row) => {
     return(
       <Touch onPress={()=>{this.props.fetchArticlesByTheme(row.id);this.props.closeDrawer()}}>
-        <View style={styles.themeItem}>
+        <View style={row.active?styles.itemActive:styles.themeItem}>
           <View style={{flex:.85}}><Text style={{fontSize:16,color:'black'}}>{row.name}</Text></View>
           <View style={{flex:.15,justifyContent:'center'}}><Image style={{width:13,height:13}} source={require('../img/ic_menu_follow.png')}/></View>
         </View>
@@ -68,10 +68,12 @@ export default class SliderBar extends Component {
   };
 
   render() {
-    let theme = new Theme(this.props.zhihu.theme);
+    let zhihu = this.props.zhihu;
+    let {resetSideBar,backToHome,closeDrawer} = this.props;
+    let theme = new Theme(zhihu.theme);
     let list = null;
-    if (this.props.zhihu.themeList) {
-      this.ds = this.ds.cloneWithRows(this.props.zhihu.themeList);
+    if (zhihu.themeList) {
+      this.ds = this.ds.cloneWithRows(JSON.parse(JSON.stringify(zhihu.themeList)));
       list = (
         <ListView
           dataSource={this.ds}
@@ -108,7 +110,7 @@ export default class SliderBar extends Component {
           </View>
         </View>
         {/*Come back to home*/}
-        <Touch onPress={()=>{this.props.backToHome();this.props.closeDrawer()}}>
+        <Touch onPress={()=>{resetSideBar();backToHome();closeDrawer()}}>
           <View style={styles.homeBtn}>
             <View style={{flex:.15}}><Image style={{width:20,height:20}} source={require('../img/menu_home.png')}/></View>
             <View style={{flex:.85}}><Text style={{color:'#00a2ed',fontSize:16}}>首页</Text></View>

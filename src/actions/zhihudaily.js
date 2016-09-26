@@ -156,6 +156,12 @@ export function refreshThemeArticles() {
   }
 }
 
+export function resetSideBar() {
+  return {
+    type:'resetSideBar'
+  }
+}
+
 export function showEditorHome(id) {
   return dispatch => {
     dispatch({
@@ -166,6 +172,13 @@ export function showEditorHome(id) {
       type: 'push',
       key: 'editor'
     })
+  }
+}
+
+export function switchTheme(theme) {
+  return {
+    type:'switchTheme',
+    theme:theme
   }
 }
 
