@@ -29,11 +29,11 @@ export default class ThemeDailyNav extends Component {
 
 }
 
-var toolbarActions = [
+let toolbarActions = [
   {title: '返回', icon:require('../img/theme_add.png'), showWithText:false, show: 'always'}
 ];
 
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
   toolbar: {
     backgroundColor: '#00a2ed',
     height: 50

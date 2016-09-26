@@ -24,7 +24,7 @@ export default class ArticleNav extends Component{
     // TODO:
   }
   render() {
-    var TouchableElement = TouchableNativeFeedback;
+    let TouchableElement = TouchableNativeFeedback;
     let {extra} = this.props.zhihu.article;
     if (extra.comments>1000) extra.comments = (extra.comments/1000).toFixed(1)+'k';
     if (extra.popularity>1000) extra.popularity = (extra.popularity/1000).toFixed(1)+'k';
@@ -85,7 +85,7 @@ export default class ArticleNav extends Component{
   }
 }
 
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
   actionsContainer: {
     backgroundColor: '#00a2ed',
     height: 50,

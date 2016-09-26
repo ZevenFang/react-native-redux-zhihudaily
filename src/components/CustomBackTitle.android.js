@@ -22,11 +22,11 @@ export default class CustomBackTitle extends Component {
 
 }
 
-/*var toolbarActions = [
+/*let toolbarActions = [
   {title: '关注', icon:require('../img/ic_back_white_android.png'), showWithText:false, show: 'always'}
 ];*/
 
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
   toolbar: {
     backgroundColor: '#00a2ed',
     height: 50
