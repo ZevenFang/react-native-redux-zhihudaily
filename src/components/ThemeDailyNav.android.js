@@ -23,7 +23,7 @@ export default class ThemeDailyNav extends Component {
         actions={toolbarActions}
         style={styles.toolbar}
         titleColor="white"
-        title="用户推荐日报" />
+        title={this.props.zhihu.themeDaily.name} />
     );
   }
 
