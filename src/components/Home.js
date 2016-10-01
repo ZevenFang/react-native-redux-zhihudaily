@@ -16,6 +16,7 @@ import Swiper from './Swiper';
 import {Grid,Col,Row} from 'react-native-easy-grid';
 import Touch from '../utils/Touch';
 import DateUtil from '../utils/DateUtil';
+import Theme from '../utils/Theme';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -47,14 +48,15 @@ export default class Home extends Component {
   };
 
   _renderRow = row => {
+    let theme = new Theme(this.props.zhihu.theme);
     if (row.subtitle) return <Text style={styles.subtitle}>{row.subtitle}</Text>;
     let multipicShadow = null;
     if (row.multipic) multipicShadow = <View style={{marginTop:60,marginLeft:55,width:30,height:15,backgroundColor:'#000',opacity:0.5,justifyContent:'center'}}><Text style={{color:'white',fontSize:12,textAlign:'center'}}>多图</Text></View>;
     return(
       <Touch onPress={() => {this.props.fetchArticleContentAndExtra(row.id)}}>
-        <View style={styles.article}>
+        <View style={[styles.article,{backgroundColor:theme.colors.listBg,borderColor:theme.colors.listBorder}]}>
           <Grid>
-            <Col size={7}><Text style={{color:'black',fontSize:18}}>{row.title}</Text></Col>
+            <Col size={7}><Text style={{color:theme.colors.listColor,fontSize:18}}>{row.title}</Text></Col>
             <Col size={3} style={{justifyContent:'center'}}>
               <Image style={{left:15,right:10,flex:1,width:85,height:85}} source={{uri:row.images[0]}}>
                 {multipicShadow}
@@ -91,16 +93,19 @@ export default class Home extends Component {
   }
 
   render() {
+
     let {zhihu,refreshArticles} = this.props;
+    let theme = new Theme(zhihu.theme);
+
     //文章列表
     let list = null;
     if (zhihu.latest.stories) {
-      this.ds = this.ds.cloneWithRows(zhihu.latest.stories);
+      this.ds = this.ds.cloneWithRows(JSON.parse(JSON.stringify(zhihu.latest.stories)));
       list = (
         <ListView
           dataSource={this.ds}
           renderRow={this._renderRow}
-          style={{marginBottom:6}}
+          style={{marginBottom:6,backgroundColor:theme.colors.background}}
         />
       )
     }
@@ -113,6 +118,7 @@ export default class Home extends Component {
         renderNavigationView={()=><SliderBar {...this.props} closeDrawer={this.closeDrawer}/>}>
         <HomeNav openDrawer={this.openDrawer} closeDrawer={this.closeDrawer} {...this.props}/>
         <ScrollView
+          style={{backgroundColor:theme.colors.background}}
           onScroll = {(e)=>{this._onScroll(e,this.props)}}
           refreshControl={
             <RefreshControl
@@ -155,7 +161,7 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     borderRadius:5,
     borderColor:'#e3e3e3',
-    borderWidth:1,
+    borderTopWidth:1,
     borderBottomWidth:5,
     flexDirection:'row'
   }

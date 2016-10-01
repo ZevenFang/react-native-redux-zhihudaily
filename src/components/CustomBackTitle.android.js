@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet,ToolbarAndroid} from 'react-native';
+import Theme from '../utils/Theme'
 
 export default class CustomBackTitle extends Component {
 
@@ -10,11 +11,12 @@ export default class CustomBackTitle extends Component {
   }
 
   render() {
+    let theme = new Theme(this.props.zhihu.theme);
     return (
       <ToolbarAndroid
         navIcon={require('../img/ic_back_white_android.png')}
         onIconClicked={()=>{this.props.onNavigate({type:'pop'})}}
-        style={styles.toolbar}
+        style={[styles.toolbar,{backgroundColor:theme.colors.titleBar}]}
         titleColor="white"
         title={this.props.title} />
     );

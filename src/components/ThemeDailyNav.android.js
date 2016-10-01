@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet,ToolbarAndroid} from 'react-native';
+import Theme from '../utils/Theme'
 
 export default class ThemeDailyNav extends Component {
 
@@ -16,12 +17,13 @@ export default class ThemeDailyNav extends Component {
   };
 
   render() {
+    let theme = new Theme(this.props.zhihu.theme);
     return (
       <ToolbarAndroid
         navIcon={require('../img/ic_menu_white_android.png')}
         onIconClicked={() => {this.handleDrawer(this.props)}}
         actions={toolbarActions}
-        style={styles.toolbar}
+        style={[styles.toolbar,{backgroundColor:theme.colors.titleBar}]}
         titleColor="white"
         title={this.props.zhihu.themeDaily.name} />
     );

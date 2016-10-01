@@ -7,8 +7,8 @@ import {
   View,
   Image,
   TouchableNativeFeedback,
-  ToastAndroid,
 } from 'react-native';
+import Theme from '../utils/Theme'
 
 export default class ArticleNav extends Component{
   _onPressShareButton() {
@@ -24,13 +24,14 @@ export default class ArticleNav extends Component{
     // TODO:
   }
   render() {
+    let theme = new Theme(this.props.zhihu.theme);
     let TouchableElement = TouchableNativeFeedback;
     let {extra} = this.props.zhihu.article;
     if (extra.comments>1000) extra.comments = (extra.comments/1000).toFixed(1)+'k';
     if (extra.popularity>1000) extra.popularity = (extra.popularity/1000).toFixed(1)+'k';
     return(
       <View {...this.props}>
-        <View style={styles.actionsContainer}>
+        <View style={[styles.actionsContainer,{backgroundColor:theme.colors.titleBar}]}>
           <TouchableElement onPress={()=>{this.props.onNavigate({type:'pop'})}}>
             <View style={styles.actionItem}>
               <Image

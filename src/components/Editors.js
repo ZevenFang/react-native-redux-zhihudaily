@@ -3,6 +3,7 @@ import {Text,WebView,View,Image,StyleSheet,ListView} from 'react-native';
 import Touch from '../utils/Touch'
 import {Grid,Row,Col} from 'react-native-easy-grid';
 import CustomBackTitle from './CustomBackTitle'
+import Theme from '../utils/Theme'
 
 export default class Editors extends Component {
 
@@ -12,6 +13,7 @@ export default class Editors extends Component {
   }
 
   _renderRow = row => {
+    let theme = new Theme(this.props.zhihu.theme);
     return(
       <View>
         <Touch onPress={()=>{this.props.showEditorHome(row.id)}}>
@@ -22,26 +24,28 @@ export default class Editors extends Component {
               </Col>
               <Col size={5}>
                 <Row>
-                  <Text style={styles.name}>{row.name}</Text>
+                  <Text style={[styles.name,{color:theme.colors.listColor}]}>{row.name}</Text>
                 </Row>
                 <Row>
-                  <Text style={styles.bio}>{row.bio}</Text>
+                  <Text style={[styles.bio,{color:theme.colors.bio}]}>{row.bio}</Text>
                 </Row>
               </Col>
             </Grid>
           </View>
         </Touch>
-        <View style={styles.line}/>
+        <View style={[styles.line,{backgroundColor:theme.colors.line}]}/>
       </View>
     )
   };
 
   render() {
-    this.ds = this.ds.cloneWithRows(this.props.zhihu.themeDaily.editors);
+    let theme = new Theme(this.props.zhihu.theme);
+    this.ds = this.ds.cloneWithRows(JSON.parse(JSON.stringify(this.props.zhihu.themeDaily.editors)));
     return (
       <View style={styles.container}>
-        <CustomBackTitle title="主编" left={-260} onNavigate={this.props.onNavigate}/>
+        <CustomBackTitle title="主编" left={-260} {...this.props}/>
         <ListView
+          style={{backgroundColor:theme.colors.background}}
           dataSource={this.ds}
           renderRow={this._renderRow}
         />

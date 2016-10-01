@@ -15,6 +15,7 @@ import SliderBar from './SliderBar'
 import DrawerLayout from 'react-native-drawer-layout';
 import {Grid,Col,Row} from 'react-native-easy-grid';
 import Touch from '../utils/Touch';
+import Theme from '../utils/Theme';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -35,13 +36,14 @@ export default class ThemeDaily extends Component {
   };
 
   _renderRow = row => {
+    let theme = new Theme(this.props.zhihu.theme);
     let multipicShadow = null;
     let item = null;
     if (row.multipic) multipicShadow = <View style={{marginTop:60,marginLeft:55,width:30,height:15,backgroundColor:'#000',opacity:0.5,justifyContent:'center'}}><Text style={{color:'white',fontSize:12,textAlign:'center'}}>多图</Text></View>;
     if (row.images)
       item = (
         <Grid>
-          <Col size={7}><Text style={{color:'black',fontSize:18}}>{row.title}</Text></Col>
+          <Col size={7}><Text style={{color:theme.colors.listColor,fontSize:18}}>{row.title}</Text></Col>
           <Col size={3} style={{justifyContent:'center'}}>
             <Image style={{left:15,right:10,flex:1,width:85,height:85}} source={{uri:row.images[0]}}>
               {multipicShadow}
@@ -49,10 +51,10 @@ export default class ThemeDaily extends Component {
           </Col>
         </Grid>
       );
-    else item = <Grid><Col size={1}><Text style={{color:'black',fontSize:18}}>{row.title}</Text></Col></Grid>;
+    else item = <Grid><Col size={1}><Text style={{color:theme.colors.listColor,fontSize:18}}>{row.title}</Text></Col></Grid>;
     return(
       <Touch onPress={() => {this.props.fetchArticleContentAndExtra(row.id)}}>
-        <View style={styles.article}>
+        <View style={[styles.article,{backgroundColor:theme.colors.listBg,borderColor:theme.colors.listBorder}]}>
           {item}
         </View>
       </Touch>
@@ -65,6 +67,7 @@ export default class ThemeDaily extends Component {
 
   render() {
 
+    let theme = new Theme(this.props.zhihu.theme);
     let {zhihu,refreshThemeArticles} = this.props;
     let img = require('../img/splash_black.png');
     if (Platform.OS==='ios') { img = {uri:zhihu.themeDaily.background}; }
@@ -94,6 +97,7 @@ export default class ThemeDaily extends Component {
         renderNavigationView={()=><SliderBar {...this.props} closeDrawer={this.closeDrawer}/>}>
         <ThemeDailyNav openDrawer={this.openDrawer} closeDrawer={this.closeDrawer} {...this.props}/>
         <ScrollView
+          style={{backgroundColor:theme.colors.background}}
           onScroll = {(e)=>{this._onScroll(e,this.props)}}
           refreshControl={
             <RefreshControl
@@ -145,7 +149,7 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     borderRadius:5,
     borderColor:'#e3e3e3',
-    borderWidth:1,
+    borderTopWidth:1,
     borderBottomWidth:5,
     flexDirection:'row'
   },

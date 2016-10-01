@@ -73,6 +73,12 @@ const actionsMap = {
   switchTheme(state,action){
     state.theme = action.theme;
     global.theme = action.theme;
+    storage.save({
+      key: 'theme',
+      rawData: {
+        name: action.theme
+      }
+    });
     return {...state}
   }
 };

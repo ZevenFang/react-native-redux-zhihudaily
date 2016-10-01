@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     fontSize:20
   },
   slide: {
-    flex:1
+    flex:1,
+    backgroundColor:'#343434'
   }
 });

@@ -57,10 +57,11 @@ export default class SliderBar extends Component {
   }
 
   _renderRow = (row) => {
+    let theme = new Theme(this.props.zhihu.theme);
     return(
       <Touch onPress={()=>{this.props.fetchArticlesByTheme(row.id);this.props.closeDrawer()}}>
-        <View style={row.active?styles.itemActive:styles.themeItem}>
-          <View style={{flex:.85}}><Text style={{fontSize:16,color:'black'}}>{row.name}</Text></View>
+        <View style={row.active?[styles.itemActive,{backgroundColor:theme.colors.homeBtn}]:styles.themeItem}>
+          <View style={{flex:.85}}><Text style={{fontSize:16,color:theme.colors.sliderBarColor}}>{row.name}</Text></View>
           <View style={{flex:.15,justifyContent:'center'}}><Image style={{width:13,height:13}} source={require('../img/ic_menu_follow.png')}/></View>
         </View>
       </Touch>
@@ -76,6 +77,7 @@ export default class SliderBar extends Component {
       this.ds = this.ds.cloneWithRows(JSON.parse(JSON.stringify(zhihu.themeList)));
       list = (
         <ListView
+          style={{backgroundColor:theme.colors.sliderBar}}
           dataSource={this.ds}
           renderRow={this._renderRow}
         />
@@ -85,33 +87,33 @@ export default class SliderBar extends Component {
       <View style={styles.container}>
         <StatusBar backgroundColor={theme.colors.statusBar}/>
         {/*Account panel*/}
-        <View style={styles.account}>
+        <View style={[styles.account,{backgroundColor:theme.colors.account}]}>
           <View style={{flexDirection:'row'}}>
             <View style={{flex:.2}}>
               <Image style={styles.avatar} source={require('../img/account_avatar.png')}/>
             </View>
             <View style={{flex:.8,justifyContent:'center'}}>
-              <Text style={{color:'white',fontSize:16}}>{'请登录'}</Text>
+              <Text style={{color:theme.colors.accountColor,fontSize:16}}>{'请登录'}</Text>
             </View>
           </View>
           <View style={{flexDirection:'row',marginTop:20}}>
             <Touch>
               <View style={styles.accountBtn}>
                 <View style={{flex:.3}}><Image style={{width:32,height:32}} source={require('../img/ic_favorites_white.png')}/></View>
-                <View style={{flex:.7,justifyContent:'center'}}><Text style={{color:'white'}}>我的收藏</Text></View>
+                <View style={{flex:.7,justifyContent:'center'}}><Text style={{color:theme.colors.accountColor}}>我的收藏</Text></View>
               </View>
             </Touch>
             <Touch>
               <View style={styles.accountBtn}>
                 <View style={{flex:.3}}><Image style={{width:32,height:32}} source={require('../img/ic_download_white.png')}/></View>
-                <View style={{flex:.7,justifyContent:'center'}}><Text style={{color:'white'}}>离线下载</Text></View>
+                <View style={{flex:.7,justifyContent:'center'}}><Text style={{color:theme.colors.accountColor}}>离线下载</Text></View>
               </View>
             </Touch>
           </View>
         </View>
         {/*Come back to home*/}
         <Touch onPress={()=>{resetSideBar();backToHome();closeDrawer()}}>
-          <View style={styles.homeBtn}>
+          <View style={[styles.homeBtn,{backgroundColor:theme.colors.homeBtn}]}>
             <View style={{flex:.15}}><Image style={{width:20,height:20}} source={require('../img/menu_home.png')}/></View>
             <View style={{flex:.85}}><Text style={{color:'#00a2ed',fontSize:16}}>首页</Text></View>
           </View>
