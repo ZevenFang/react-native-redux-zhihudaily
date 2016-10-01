@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 import {Text,WebView,View,Image,StyleSheet,Dimensions} from 'react-native';
 import ArticleNav from './ArticleNav'
+import Theme from '../utils/Theme'
 
 export default class Article extends Component {
 
   render() {
     let {zhihu} = this.props;
     let body = zhihu.article.body;
+    let darkTheme = '';
+    if (zhihu.theme == Theme.DARK)
+      darkTheme = "<style>.main-wrap{background-color: #343434} .headline{border-color: #343434} .headline-title{color:#888} .question-title{color: #888} .meta .author{color: #888;} .content{color: #888} .view-more a{background-color: #292929</style>";
     let image = '<div class="img-place-holder" style="overflow: hidden;position: relative"><img src="'+zhihu.article.image+'" style="margin-top:-80px">'
       +'<div style="position:absolute;bottom:5px;right: 10px;color: white">'
       +zhihu.article.image_source
@@ -16,7 +20,8 @@ export default class Article extends Component {
     body = body.replace('<div class="img-place-holder"></div>',image);
     let html = '<!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" href="'
       + zhihu.article.css[0]
-      + '" /></head><body>' + body
+      + '" />' +
+      darkTheme + '</head><body>' + body
       + '</body></html>';
     return (
       <View style={{flex:1}}>
