@@ -9,6 +9,8 @@
 ![IOS version](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/ios.gif)
 ### Work with redux
 ![Redux](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/redux.png)
+### Dark theme
+![Dark theme](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/darkTheme.gif)
 
 ## Getting started
 ```shell
@@ -24,7 +26,7 @@ npm run ios # run ios version
 参考[连接Redux调试服务器](http://zevenfang.github.io/2016/08/21/连接Redux调试服务器/)
 
 ## Todos
-- [ ] 夜间模式
+- [x] 夜间模式
 - [ ] 关注主题日报
 - [ ] 文章评论列表
 - [ ] 使用Codepush
