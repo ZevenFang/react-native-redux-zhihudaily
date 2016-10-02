@@ -7,10 +7,10 @@
 ![Android version](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/android.gif)
 ### IOS preview
 ![IOS version](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/ios.gif)
-### Work with redux
-![Redux](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/redux.png)
 ### Dark theme
 ![Dark theme](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/darkTheme.gif)
+### Work with redux
+![Redux](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/redux.png)
 
 ## Getting started
 ```shell
