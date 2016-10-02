@@ -70,7 +70,7 @@ export default class ThemeDaily extends Component {
     let theme = new Theme(this.props.zhihu.theme);
     let {zhihu,refreshThemeArticles} = this.props;
     let img = require('../img/splash_black.png');
-    if (Platform.OS==='ios') { img = {uri:zhihu.themeDaily.background}; }
+    //if (Platform.OS==='ios') { img = {uri:zhihu.themeDaily.background}; }
     
     //文章列表
     let list = null;
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     borderRadius:5,
     borderColor:'#e3e3e3',
     borderTopWidth:1,
-    borderBottomWidth:5,
+    borderBottomWidth:2,
     flexDirection:'row'
   },
   title:{

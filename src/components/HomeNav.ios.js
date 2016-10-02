@@ -1,33 +1,16 @@
 import React, {Component} from 'react';
-import {StyleSheet,Image} from 'react-native';
+import {StyleSheet,Image,ActionSheetIOS} from 'react-native';
 import NavBar, { NavGroup, NavButton, NavButtonText, NavTitle } from 'react-native-nav'
+import Theme from '../utils/Theme'
 
-const styles = StyleSheet.create({
-  statusBar: {
-    backgroundColor: '#2986E2'
-  },
-  navBar: {
-    backgroundColor: '#00a2ed',
-    height: 50,
-    paddingLeft: 0
-  },
-  buttonText: {
-    color: '#rgba(255, 255, 255, 1)'
-  },
-  navButton:{
-    marginTop: 10,
-    flex: 1
-  },
-  icon:{
-    width:30,
-    height:30
-  }
-});
+let BUTTONS = ['夜间模式','设置','取消'];
+let CANCEL_INDEX = 2;
 
 export default class HomeNav extends Component {
 
   title = '首页';
   drawer = false;
+
 
   constructor(props) {
     super(props);
@@ -38,13 +21,45 @@ export default class HomeNav extends Component {
     // this.drawer = !this.drawer;
   };
 
+  showActionSheet(props) {
+    BUTTONS[0] = this.props.zhihu.theme==Theme.DARK?'日间模式':'夜间模式';
+    ActionSheetIOS.showActionSheetWithOptions({
+          options: BUTTONS,
+          cancelButtonIndex: CANCEL_INDEX
+        },
+        (index) => {if(index==0){props.switchTheme(this.props.zhihu.theme==Theme.DARK?Theme.LIGHT:Theme.DARK)}});
+  }
+
   render() {
+    let theme = new Theme(this.props.zhihu.theme);
     let title = {
         color: '#rgba(255, 255, 255, 1)',
         left: -70
     };
-    if (this.props.zhihu.title.length==4) title.left = -55;
-    else if (this.props.zhihu.title.length>4) title.left = -30;
+    let styles = StyleSheet.create({
+      statusBar: {
+        backgroundColor: theme.colors.statusBar
+      },
+      navBar: {
+        backgroundColor: theme.colors.titleBar,
+        height: 50,
+        paddingLeft: 15
+      },
+      buttonText: {
+        color: '#rgba(255, 255, 255, 1)'
+      },
+      navButton:{
+        marginTop: 20,
+        flex: 1
+      },
+      icon:{
+        width:30,
+        height:30
+      }
+    });
+    if (this.props.zhihu.title.length<4) title.left = -100;
+    else if (this.props.zhihu.title.length==4) title.left = -80;
+    else if (this.props.zhihu.title.length>4) title.left = -60;
     return (
       <NavBar style={styles}>
         <NavButton style={styles.navButton} onPress={()=>{this.handleDrawer(this.props)}}>
@@ -61,7 +76,7 @@ export default class HomeNav extends Component {
               <Image style={styles.icon} source={require('../img/ic_message_white.png')} resizeMode={'contain'}/>
             </NavButtonText>
           </NavButton>
-          <NavButton style={styles.navButton}>
+          <NavButton style={styles.navButton} onPress={()=>{this.showActionSheet(this.props)}}>
             <NavButtonText style={styles.buttonText}>
               <Image style={styles.icon} source={require('../img/ic_more_white.png')} resizeMode={'contain'}/>
             </NavButtonText>

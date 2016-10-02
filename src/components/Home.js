@@ -8,7 +8,8 @@ import {
   Text,
   Image,
   ListView,
-  RefreshControl
+  RefreshControl,
+  Platform
 } from 'react-native';
 import SliderBar from './SliderBar'
 import DrawerLayout from 'react-native-drawer-layout';
@@ -78,6 +79,12 @@ export default class Home extends Component {
       props.setTitle('首页');
     else if (y >= 240 && title != '今日热闻' && (this.pos.length == 0 || y <= this.pos[0][0])) {
       props.setTitle('今日热闻');
+    }
+    else if (Platform.OS=='ios'&&content <= height + y) { // 判断是否下拉到底
+      let date = new Date(+this.now-24*60*60*1000 * (this.pos.length+1));
+      let dateText = DateUtil.getDateText(date);
+      this.pos.push([content,dateText]);
+      this.props.fetchArticleBefore(dateText,DateUtil.getBeforeText(date));
     }
     else if (content == height + y) { // 判断是否下拉到底
       let date = new Date(+this.now-24*60*60*1000 * (this.pos.length+1));
@@ -162,7 +169,7 @@ const styles = StyleSheet.create({
     borderRadius:5,
     borderColor:'#e3e3e3',
     borderTopWidth:1,
-    borderBottomWidth:5,
+    borderBottomWidth:2,
     flexDirection:'row'
   }
 });

@@ -27,7 +27,7 @@ export default class Theme{
       primary:'#FFF',
       secondary:'#888',
       listBg:'#404040',
-      listBorder: '#111',
+      listBorder: '#333',
       listColor: '#fff',
       titleBar:'#222222',
       statusBar:'#333',

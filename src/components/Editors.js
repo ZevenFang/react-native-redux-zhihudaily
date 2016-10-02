@@ -43,7 +43,7 @@ export default class Editors extends Component {
     this.ds = this.ds.cloneWithRows(JSON.parse(JSON.stringify(this.props.zhihu.themeDaily.editors)));
     return (
       <View style={styles.container}>
-        <CustomBackTitle title="主编" left={-260} {...this.props}/>
+        <CustomBackTitle title="主编" left={-300} {...this.props}/>
         <ListView
           style={{backgroundColor:theme.colors.background}}
           dataSource={this.ds}

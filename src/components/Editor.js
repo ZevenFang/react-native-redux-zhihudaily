@@ -11,7 +11,7 @@ export default class Editor extends Component {
     let uri = Http.HOST+'editor/'+id+'/profile-page/'+Platform.OS;
     return (
       <View style={{flex:1}}>
-        <CustomBackTitle title="主编资料" left={-225} {...this.props}/>
+        <CustomBackTitle title="主编资料" left={-270} {...this.props}/>
         <WebView source={{uri}}/>
       </View>
     );

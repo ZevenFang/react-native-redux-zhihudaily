@@ -1,32 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet,Image} from 'react-native';
 import NavBar, { NavGroup, NavButton, NavButtonText, NavTitle } from 'react-native-nav'
-
-const styles = StyleSheet.create({
-  statusBar: {
-    backgroundColor: '#2986E2'
-  },
-  navBar: {
-    backgroundColor: '#00a2ed',
-    height: 50,
-    paddingLeft: 0
-  },
-  title: {
-    color: '#rgba(255, 255, 255, 1)',
-    left: -70
-  },
-  buttonText: {
-    color: '#rgba(255, 255, 255, 1)'
-  },
-  navButton:{
-    marginTop: 10,
-    flex: 1
-  },
-  icon:{
-    width:30,
-    height:30
-  }
-});
+import Theme from '../utils/Theme';
 
 export default class ThemeDailyNav extends Component {
 
@@ -43,6 +18,32 @@ export default class ThemeDailyNav extends Component {
   };
 
   render() {
+    let theme = new Theme(this.props.zhihu.theme);
+    let styles = StyleSheet.create({
+      statusBar: {
+        backgroundColor: theme.colors.statusBar
+      },
+      navBar: {
+        backgroundColor: theme.colors.titleBar,
+        height: 50,
+        paddingLeft: 15
+      },
+      title: {
+        color: '#rgba(255, 255, 255, 1)',
+        left: -100
+      },
+      buttonText: {
+        color: '#rgba(255, 255, 255, 1)'
+      },
+      navButton:{
+        marginTop: 20,
+        flex: 1
+      },
+      icon:{
+        width:30,
+        height:30
+      }
+    });
     return (
       <NavBar style={styles}>
         <NavButton style={styles.navButton} onPress={()=>{this.handleDrawer(this.props)}}>
