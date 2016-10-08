@@ -17,12 +17,17 @@ export default class DateUtil{
     else return month+1+'';
   }
 
+  static getDateDayText(date){
+    if (date<10) return '0'+date;
+    else return date+'';
+  }
+
   static getDateText(date){
     return this.getMonthText(date.getMonth())+'月'+date.getDate()+'日 星期'+this.getDayText(date.getDay());
   }
   
   static getBeforeText(date){
-    return date.getFullYear()+this.getMonthText(date.getMonth())+date.getDate();
+    return date.getFullYear()+this.getMonthText(date.getMonth())+this.getDateDayText(date.getDate());
   }
 
 }

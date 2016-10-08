@@ -86,7 +86,7 @@ export default class Home extends Component {
       this.pos.push([content,dateText]);
       this.props.fetchArticleBefore(dateText,DateUtil.getBeforeText(date));
     }
-    else if (content == height + y) { // 判断是否下拉到底
+    else if (Platform.OS=='android'&&content == height + y) { // 判断是否下拉到底
       let date = new Date(+this.now-24*60*60*1000 * (this.pos.length+1));
       let dateText = DateUtil.getDateText(date);
       this.pos.push([content,dateText]);
