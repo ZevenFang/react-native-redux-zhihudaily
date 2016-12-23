@@ -11,13 +11,16 @@
     "test": "mocha --recursive --compilers js:babel-core/register -r test/setup",
     "cover": "babel-node node_modules/.bin/isparta cover _mocha -- --recursive -r test/setup",
     "remotedev": "remotedev-debugger --hostname localhost --port 5678 --injectserver",
-    "postinstall": "node necard-patch.js && rnpm link && npm run remotedev && rndebugger-open"
+    "postinstall": "node necard-patch.js && rnpm link && npm run remotedev && rndebugger-open",
+    "android-release": "code-push release-react react-native-redux-zhihudaily android --des '测试热更新，改变标题栏颜色'",
+    "release-history": "code-push deployment history react-native-redux-zhihudaily Staging"
   },
   "dependencies": {
     "immutable": "^3.7.6",
     "lodash": "^4.3.0",
     "react": "15.1.0",
     "react-native": "^0.27.1",
+    "react-native-code-push": "^1.16.1-beta",
     "react-native-drawer-layout": "^1.0.0",
     "react-native-easy-grid": "^0.1.6",
     "react-native-nav": "^1.1.4",
