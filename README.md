@@ -21,6 +21,7 @@ npm run ios # run ios version
 
 ## Codepush
 体验Codepush请下载Release版本，或自己生成release版本：
+
 ![Codepush](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/zhihurn.png)
 ```shell
 cd android && ./gradlew assembleRelease #生成已签名apk
