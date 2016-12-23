@@ -19,6 +19,14 @@ npm run android # enjoy it
 npm run ios # run ios version
 ```
 
+## Codepush
+![Codepush](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/zhihurn.png)
+体验Codepush请下载Release版本，或自己生成release版本：
+```shell
+cd android && ./gradlew assembleRelease #生成已签名apk
+cd android && ./gradlew installRelease #直接安装到设备上
+```
+
 ## Debug
 ###连接开发服务器
 参考[ReactNative从设备上访问开发服务器](http://zevenfang.github.io/2016/06/22/ReactNative从设备上访问开发服务器/)
@@ -29,4 +37,4 @@ npm run ios # run ios version
 - [x] 夜间模式
 - [ ] 关注主题日报
 - [ ] 文章评论列表
-- [ ] 使用Codepush
+- [X] 使用Codepush(目前仅支持Android，尽快补上iOS)
