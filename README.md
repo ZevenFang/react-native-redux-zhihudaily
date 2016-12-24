@@ -38,4 +38,4 @@ cd android && ./gradlew installRelease #直接安装到设备上
 - [x] 夜间模式
 - [ ] 关注主题日报
 - [ ] 文章评论列表
-- [X] 使用Codepush(目前仅支持Android，尽快补上iOS)
+- [X] 使用Codepush
