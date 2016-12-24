@@ -13,8 +13,9 @@
     "remotedev": "remotedev-debugger --hostname localhost --port 5678 --injectserver",
     "postinstall": "node necard-patch.js && rnpm link && npm run remotedev && rndebugger-open",
     "android-release": "code-push release-react react-native-redux-zhihudaily android --des '测试热更新，改变标题栏颜色'",
-    "ios-release": "code-push release-react react-native-redux-zhihudaily ios --des '测试热更新，改变标题栏颜色iOS'",
-    "release-history": "code-push deployment history react-native-redux-zhihudaily Staging"
+    "ios-release": "code-push release-react react-native-redux-zhihudaily-ios ios --des '测试热更新，改变标题栏颜色'",
+    "android-history": "code-push deployment history react-native-redux-zhihudaily Staging",
+    "ios-history": "code-push deployment history react-native-redux-zhihudaily-ios Staging"
   },
   "dependencies": {
     "immutable": "^3.7.6",
