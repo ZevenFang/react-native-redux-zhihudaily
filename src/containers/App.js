@@ -34,7 +34,7 @@ storage.load({
 export default class App extends Component {
 
   componentDidMount(){
-    if (!__DEV__&&Platform.OS==='android')
+    if (!__DEV__&&Platform.OS==='android'||Platform.OS==='ios')
       this.sync();
   }
 
