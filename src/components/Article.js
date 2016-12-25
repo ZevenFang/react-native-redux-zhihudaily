@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text,WebView,View,Image,StyleSheet,Dimensions} from 'react-native';
+import {WebView,View} from 'react-native';
 import ArticleNav from './ArticleNav'
 import Theme from '../utils/Theme'
 
@@ -9,6 +9,8 @@ export default class Article extends Component {
     let {zhihu} = this.props;
     let body = zhihu.article.body;
     let darkTheme = '';
+    let theme = new Theme(zhihu.theme);
+    let stylesContent = {...styles.content, backgroundColor:theme.colors.background};
     if (zhihu.theme == Theme.DARK)
       darkTheme = "<style>.main-wrap{background-color: #343434} .headline{border-color: #343434} .headline-title{color:#888} .question-title{color: #888} .meta .author{color: #888;} .content{color: #888} .view-more a{background-color: #292929</style>";
     let image = '<div class="img-place-holder" style="overflow: hidden;position: relative"><img src="'+zhihu.article.image+'" style="margin-top:-80px">'
@@ -40,7 +42,7 @@ export default class Article extends Component {
          </Image>
          */}
         <WebView
-          style={styles.content} source={{html:html}}/>
+          style={stylesContent} source={{html:html}}/>
       </View>
 
     );
@@ -49,7 +51,7 @@ export default class Article extends Component {
 }
 
 const HEADER_SIZE = 215;
-const styles = StyleSheet.create({
+const styles = {
   headerImage: {
     height: HEADER_SIZE,
     flexDirection: 'row',
@@ -79,4 +81,4 @@ const styles = StyleSheet.create({
     bottom: 0,
     top:0
   }
-});
+};
