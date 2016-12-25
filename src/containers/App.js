@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import CodePush from 'react-native-code-push';
 import Root from './Root';
 import Home from './Home';
 import Counter from './Counter';
@@ -28,6 +28,7 @@ storage.load({
   });
 });
 
+@CodePush({ checkFrequency: CodePush.CheckFrequency.MANUAL })
 export default class App extends Component {
 
   renderScene = props => {
