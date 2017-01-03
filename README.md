@@ -24,8 +24,8 @@ npm run ios # run ios version
 
 ![Codepush](https://raw.github.com/ZevenFang/react-native-redux-zhihudaily/master/screenshot/zhihurn.png)
 ```shell
-cd android && ./gradlew assembleRelease #生成已签名apk
-cd android && ./gradlew installRelease #直接安装到设备上
+cd android && ./gradlew assembleRelease # 生成已签名apk
+cd android && ./gradlew installRelease # 直接安装到设备上
 ```
 
 ## Debug
