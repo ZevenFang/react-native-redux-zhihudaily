@@ -3,7 +3,7 @@ import {StyleSheet,Image,ActionSheetIOS} from 'react-native';
 import NavBar, { NavGroup, NavButton, NavButtonText, NavTitle } from 'react-native-nav'
 import Theme from '../utils/Theme'
 
-let BUTTONS = ['夜间模式','设置','取消'];
+let BUTTONS = ['夜间模式','粉色模式','设置','取消'];
 let CANCEL_INDEX = 2;
 
 export default class HomeNav extends Component {
@@ -27,7 +27,14 @@ export default class HomeNav extends Component {
           options: BUTTONS,
           cancelButtonIndex: CANCEL_INDEX
         },
-        (index) => {if(index==0){props.switchTheme(this.props.zhihu.theme==Theme.DARK?Theme.LIGHT:Theme.DARK)}});
+        (index) => {
+          if(index==0){
+            props.switchTheme(this.props.zhihu.theme==Theme.DARK?Theme.LIGHT:Theme.DARK);
+          } else if (index==1){
+            props.switchTheme(Theme.PINK);
+          }
+        }
+    );
   }
 
   render() {

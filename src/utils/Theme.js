@@ -19,6 +19,7 @@ export default class Theme{
       accountColor:'#fff',
       sliderBarColor:'#000',
       homeBtn:'#F3F3F3',
+      homeBtnText:'#00A2ED',
       background:'#F3F3F3',
       bio:'grey',
       line:'#DDD'
@@ -36,14 +37,35 @@ export default class Theme{
       accountColor:'#999',
       sliderBarColor:'#999',
       homeBtn:'#2C2C2C',
+      homeBtnText:'#00A2ED',
       background:'#343434',
       bio:'#999',
       line:'#555'
+    },
+    pink:{
+      primary:'#FFF',
+      secondary:'#000',
+      listBg:'#FFF',
+      listBorder: '#e3e3e3',
+      listColor: '#000',
+      titleBar:'plum',
+      statusBar:'pink',
+      sliderBar:'#FFF',
+      account:'plum',
+      accountColor:'#fff',
+      sliderBarColor:'#000',
+      homeBtn:'#F3F3F3',
+      homeBtnText:'plum',
+      homeBtnIcon:require('../img/menu_home_pink.png'), // Set this prop if you want to change the home button icon.
+      background:'#F3F3F3',
+      bio:'grey',
+      line:'#DDD'
     }
   };
 
   static LIGHT = 'light';
   static DARK = 'dark';
+  static PINK = 'pink';
 
   colors = {};
 

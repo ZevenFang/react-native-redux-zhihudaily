@@ -19,6 +19,8 @@ export default class HomeNav extends Component {
   onActionSelected(position,props) {
     if (position === 1) { // 夜间模式|日间模式
       props.switchTheme(props.zhihu.theme == Theme.DARK?Theme.LIGHT:Theme.DARK);
+    } else if (position === 2) {
+      props.switchTheme(Theme.PINK);
     }
   };
 
@@ -50,5 +52,6 @@ export default class HomeNav extends Component {
 let toolbarActions = [
   {title: '提醒', icon:require('../img/ic_message_white.png'), showWithText:false, show: 'always'},
   {title: '夜间模式', show:'never'},
+  {title: '粉色模式', show:'never'},
   {title: '设置选项', show:'never'}
 ];

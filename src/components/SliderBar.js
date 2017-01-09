@@ -120,10 +120,11 @@ export default class SliderBar extends Component {
   };
 
   render() {
-    let zhihu = this.props.zhihu;
+    let {zhihu} = this.props;
     let {resetSideBar,backToHome,closeDrawer} = this.props;
     let theme = new Theme(zhihu.theme);
     let list = null;
+    let homeIcon = theme.colors.homeBtnIcon? theme.colors.homeBtnIcon : require('../img/menu_home.png');
     if (zhihu.themeList) {
       this.ds = this.ds.cloneWithRows(JSON.parse(JSON.stringify(zhihu.themeList)));
       list = (
@@ -165,8 +166,8 @@ export default class SliderBar extends Component {
         {/*Come back to home*/}
         <Touch onPress={()=>{resetSideBar();backToHome();closeDrawer()}}>
           <View style={[styles.homeBtn,{backgroundColor:theme.colors.homeBtn}]}>
-            <View style={{flex:.15}}><Image style={{width:20,height:20}} source={require('../img/menu_home.png')}/></View>
-            <View style={{flex:.85}}><Text style={{color:'#00a2ed',fontSize:16}}>首页</Text></View>
+            <View style={{flex:.15}}><Image style={{width:20,height:20}} source={homeIcon}/></View>
+            <View style={{flex:.85}}><Text style={{color:theme.colors.homeBtnText,fontSize:16}}>首页</Text></View>
           </View>
         </Touch>
         {/*Theme daily*/}
