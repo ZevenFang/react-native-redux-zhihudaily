@@ -5,7 +5,7 @@ const { StateUtils } = NavigationExperimental;
 const initialState = {
   index: 0,
   key: 'splash',
-  children: [{ key: 'splash' }],
+  routes: [{ key: 'splash' }],
 };
 
 const actionsMap = {

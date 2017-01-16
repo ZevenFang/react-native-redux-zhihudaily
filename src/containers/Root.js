@@ -27,7 +27,7 @@ export default class Root extends Component {
   };
 
   onMainScreen(){
-    let routes = this.props.routes.children;
+    let routes = this.props.routes.routes;
     return routes[routes.length-1].key==='home';
   }
 
@@ -54,7 +54,7 @@ export default class Root extends Component {
         direction="horizontal"
         onNavigate={this.handleNavigation}
         navigationState={this.props.routes}
-        renderScene={this.props.renderScene}
+        renderScene={props => this.props.renderScene({...props, onNavigate: this.handleNavigation})}
       />
     );
   }

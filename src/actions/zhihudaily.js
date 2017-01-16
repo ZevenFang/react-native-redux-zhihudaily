@@ -120,7 +120,7 @@ export function fetchThemeDailyList() {
 export function fetchArticlesByTheme(themeId) {
   return (dispatch,getState) => {
     let {routes} = getState();
-    if (routes.children[routes.children.length-1].key!='theme_daily')
+    if (routes.routes[routes.routes.length-1].key!='theme_daily')
       dispatch({
         type: 'push',
         key: 'theme_daily'
@@ -192,7 +192,7 @@ export function setTitle(title) {
 export function backToHome() {
   return (dispatch,getState) => {
     let {routes} = getState();
-    if (routes.children[routes.children.length-1].key=='theme_daily')
+    if (routes.routes[routes.routes.length-1].key=='theme_daily')
       dispatch({
         type: 'pop'
       });

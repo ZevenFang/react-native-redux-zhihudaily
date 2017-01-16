@@ -5,24 +5,27 @@ import { Platform } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
+import * as actionCreators from './actions/counter';
 
 const middlewares = [thunk];
 
 let enhancer;
+let updateStore = f => f;
 if (__DEV__) {
+  /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
   const installDevTools = require('immutable-devtools');
-  installDevTools(Immutable);
+  const devTools = global.reduxNativeDevTools || require('remote-redux-devtools');
 
-  const reduxRemoteDevTools = require('remote-redux-devtools');
+  installDevTools(Immutable);
+  updateStore = devTools.updateStore || updateStore;
+
   enhancer = compose(
     applyMiddleware(...middlewares),
-    global.reduxNativeDevTools ?
-      global.reduxNativeDevTools() :
-      reduxRemoteDevTools({
-        name: Platform.OS,
-        host: 'localhost',
-        port: 5678
-      }),
+    devTools({
+      name: Platform.OS,
+      ...require('../package.json').remotedev,
+      actionCreators,
+    })
   );
 } else {
   enhancer = applyMiddleware(...middlewares);
@@ -30,6 +33,7 @@ if (__DEV__) {
 
 export default function configureStore(initialState) {
   const store = createStore(reducer, initialState, enhancer);
+  updateStore(store);
   if (module.hot) {
     module.hot.accept(() => {
       store.replaceReducer(require('./reducers').default);
