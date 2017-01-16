@@ -14,9 +14,9 @@
 
 ## Getting started
 ```shell
-npm install # install dependencies
-npm run android # enjoy it
-npm run ios # run ios version
+yarn install # recommend use yarn, also you can use npm install.
+yarn run android # enjoy it
+yarn run ios # run ios version
 ```
 
 ## Codepush
