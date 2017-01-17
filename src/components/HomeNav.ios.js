@@ -4,7 +4,7 @@ import NavBar, { NavGroup, NavButton, NavButtonText, NavTitle } from 'react-nati
 import Theme from '../utils/Theme'
 
 let BUTTONS = ['夜间模式','粉色模式','设置','取消'];
-let CANCEL_INDEX = 2;
+let CANCEL_INDEX = 3;
 
 export default class HomeNav extends Component {
 
@@ -22,7 +22,7 @@ export default class HomeNav extends Component {
   };
 
   showActionSheet(props) {
-    BUTTONS[0] = this.props.zhihu.theme==Theme.DARK?'日间模式':'夜间模式';
+    // BUTTONS[0] = this.props.zhihu.theme==Theme.DARK?'日间模式':'夜间模式';
     ActionSheetIOS.showActionSheetWithOptions({
           options: BUTTONS,
           cancelButtonIndex: CANCEL_INDEX
