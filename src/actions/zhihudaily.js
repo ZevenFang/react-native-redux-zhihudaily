@@ -16,16 +16,23 @@ export function fetchSplash() {
           splash: d
         });
       },1000);
-      //停顿2秒后进入首页
-      setTimeout(function () {
-        dispatch({
-          type: 'push',
-          key: 'home'
-        });
-      },3000)
     },function () {
-      Toast.show('请检查网络后重试');
-    })
+      // Toast.show('请检查网络后重试');
+      let splash = {
+        img: require('../img/splash.png')
+      };
+      dispatch({
+        type: 'fetchSplash',
+        splash
+      });
+    });
+    //停顿2秒后进入首页
+    setTimeout(function () {
+      dispatch({
+        type: 'push',
+        key: 'home'
+      });
+    },3000)
   }
 }
 
