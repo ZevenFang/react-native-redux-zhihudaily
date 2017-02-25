@@ -45,3 +45,4 @@ android/keystores/debug.keystore
 # Deco
 #
 .deco/
+*.iml
