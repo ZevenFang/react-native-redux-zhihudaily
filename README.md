@@ -29,9 +29,9 @@ cd android && ./gradlew installRelease # 直接安装到设备上
 ```
 
 ## Debug
-###连接开发服务器
+### 连接开发服务器
 参考[ReactNative从设备上访问开发服务器](http://zevenfang.github.io/2016/06/22/ReactNative从设备上访问开发服务器/)
-###连接Redux调试服务器
+### 连接Redux调试服务器
 参考[连接Redux调试服务器](http://zevenfang.github.io/2016/08/21/连接Redux调试服务器/)
 
 ## Todos
