@@ -12,7 +12,7 @@
     "test": "mocha --recursive --compilers js:babel-core/register -r test/setup",
     "cover": "nyc npm test",
     "remotedev": "remotedev-debugger --injectserver",
-    "postinstall": "npm run link && npm run remotedev && rndebugger-open",
+    "postinstall": "npm run remotedev && rndebugger-open",
     "android-release": "code-push release-react react-native-redux-zhihudaily android --des '测试热更新，改变标题栏颜色'",
     "ios-release": "code-push release-react react-native-redux-zhihudaily-ios ios --des '测试热更新，改变标题栏颜色'",
     "android-history": "code-push deployment history react-native-redux-zhihudaily Staging",
