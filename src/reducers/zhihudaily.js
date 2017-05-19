@@ -1,3 +1,5 @@
+import Theme from '../utils/Theme';
+
 const initialState = {
   splash: { //默认闪屏界面
     img: require('../img/splash_black.png'),
@@ -11,7 +13,7 @@ const initialState = {
 const actionsMap = {
   fetchSplash(state,action){
     state.splash = action.splash;
-    state.theme = global.theme; //设置主题
+    state.theme = global.theme||Theme.LIGHT; //设置主题
     return {...state};
   },
   fetchLatestArticles(state,action){
