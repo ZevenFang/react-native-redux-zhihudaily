@@ -22,10 +22,6 @@ import Theme from '../utils/Theme';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-/**
- * TODO: 根据时间更新标题
- */
-
 export default class Home extends Component {
 
   pos = [];
@@ -36,7 +32,7 @@ export default class Home extends Component {
     // props.fetchLatestArticles();
     // props.fetchThemeDailyList();
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    let now = props.zhihu.latest.date;
+    let now = props.zhihu.latest.date || DateUtil.getCurrentDateText();
     this.now = new Date(now.substring(0,4)+'/'+now.substring(4,6)+'/'+now.substring(6,8));
   }
 

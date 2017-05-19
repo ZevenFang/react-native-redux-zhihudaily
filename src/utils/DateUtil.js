@@ -30,4 +30,9 @@ export default class DateUtil{
     return date.getFullYear()+this.getMonthText(date.getMonth())+this.getDateDayText(date.getDate());
   }
 
+  static getCurrentDateText(){
+    let date = new Date();
+    return date.getFullYear().toString()+(date.getMonth()+1)+date.getDate();
+  }
+
 }
