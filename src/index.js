@@ -1,15 +1,34 @@
 import React from 'react';
-import { AppRegistry } from 'react-native';
-import { Provider } from 'react-redux';
-import App from './containers/App';
-import configureStore from './configureStore';
+import Expo from 'expo';
+import './pages/HomePage';
+import Router from './Router';
+import {
+  NavigationProvider
+} from '@expo/ex-navigation';
+import DrawerNavigationLayout from './components/DrawerNavigationLayout';
 
-const store = configureStore();
+class App extends React.Component {
 
-const ZhihuDaily = () => (
-  <Provider store={store}>
-    <App />
-  </Provider>
-);
+  async componentWillMount() {
+    await Expo.Font.loadAsync({
+      'Roboto': require('native-base/Fonts/Roboto.ttf'),
+      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+    });
+  }
 
-AppRegistry.registerComponent('ZhihuDaily', () => ZhihuDaily);
+  render() {
+    let menus = [
+      {id: 'home', title: 'Home'},
+      {id: 'counter', title: 'Counter'},
+      {id: 'todos', title: 'Todos'},
+      {id: 'axios', title: 'Axios'}
+    ];
+    return (
+      <NavigationProvider router={Router}>
+        <DrawerNavigationLayout menus={menus} initialItem="home"/>
+      </NavigationProvider>
+    );
+  }
+}
+
+export default App;
