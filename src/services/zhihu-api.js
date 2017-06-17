@@ -27,11 +27,11 @@ export function getShortComments(id) {
   return axios.get(`${host}/story/${id}/short-comments`)
 }
 
-export function getSections() {
+export function getThemes() {
   return axios.get(`${host}/themes`)
 }
 
-export function getSection(id) {
+export function getTheme(id) {
   return axios.get(`${host}/theme/${id}`)
 }
 
