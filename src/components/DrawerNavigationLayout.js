@@ -37,7 +37,7 @@ class DrawerNavigationLayout extends React.Component {
 
   render() {
     let {initialItem, zhihu} = this.props;
-    let menus = zhihu.themesList.map(v=>({id: 'counter', title: v.name}));
+    let menus = zhihu.themesList.map(v=>({id: v.id, title: v.name}));
     menus.unshift({id: 'home', title: '首页'});
     return (
       <DrawerNavigation
@@ -56,14 +56,18 @@ class DrawerNavigationLayout extends React.Component {
             <StackNavigation
               id={v.id}
               defaultRouteConfig={defaultRouteConfig}
-              initialRoute={Router.getRoute(v.route||v.id)}
+              initialRoute={this._renderRouter(v.id, v.title)}
             />
           </DrawerNavigationItem>
         ))}
-
       </DrawerNavigation>
     );
   }
+
+  _renderRouter = (id, title) => {
+    if (id=='home') return Router.getRoute(id);
+    return Router.getRoute('theme', {id, title});
+  };
 
   _renderHeader = () => {
     return (

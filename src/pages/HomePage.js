@@ -5,7 +5,7 @@ class HomePage extends React.Component {
 
   static route = {
     navigationBar: {
-      title: 'Home'
+      title: '首页'
     }
   };
 
