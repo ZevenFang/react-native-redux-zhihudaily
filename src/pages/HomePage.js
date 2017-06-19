@@ -12,7 +12,6 @@ class HomePage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Thumbnail square size={100} source={require('../assets/app-icon.png')}/>
         <Text style={{marginTop: 20}}>Click on the upper left corner to navigate.</Text>
       </View>
     );
