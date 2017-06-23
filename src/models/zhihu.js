@@ -17,7 +17,8 @@ export default {
   },
   reducers: {
     setLatest(state, {data}){
-      state.dates.push(data.date);
+      if (state.dates.indexOf(data.date)<0)
+        state.dates.push(data.date);
       state.list[data.date] = data.stories;
       state.topNews = data.top_stories;
       return {...state};

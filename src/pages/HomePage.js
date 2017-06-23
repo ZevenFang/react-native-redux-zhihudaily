@@ -15,36 +15,31 @@ class HomePage extends React.Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      isRefreshing: false
-    };
     props.dispatch({
       type: 'zhihu/getLatest'
     })
   }
 
   _onRefresh = () => {
-    this.setState({isRefreshing: true});
-    setTimeout(() => {
-      this.setState({
-        isRefreshing: false
-      });
-    }, 5000);
+    this.props.dispatch({
+      type: 'zhihu/getLatest'
+    })
   };
 
   render() {
-    let {zhihu} = this.props;
+    let {zhihu, loading} = this.props;
+    let isEmpty = zhihu.dates.length==0;
     return (
-      zhihu.dates.length==0?<Loading/>:
+      isEmpty?<Loading/>:
       <Container>
         <Content refreshControl={
           <RefreshControl
-              refreshing={this.state.isRefreshing}
-              onRefresh={this._onRefresh}
-              tintColor="lightgrey"
-              colors={['#00a2ed', '#a200ed', '#a2ed00']}
-              progressBackgroundColor="#fff"
-            />
+            refreshing={!isEmpty && loading}
+            onRefresh={this._onRefresh}
+            tintColor="lightgrey"
+            colors={['#00a2ed', '#a200ed', '#a2ed00']}
+            progressBackgroundColor="#fff"
+          />
         }>
           <Swiper data={zhihu.topNews} onItemPress={alert}/>
           <List>
@@ -92,4 +87,4 @@ const styles = {
   }
 };
 
-export default connect(({zhihu})=>({zhihu}))(HomePage);
+export default connect(({zhihu, loading})=>({zhihu, loading: loading.global}))(HomePage);
