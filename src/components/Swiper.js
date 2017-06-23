@@ -34,7 +34,7 @@ export default class MySwiper extends Component {
                 dot={<View style={{backgroundColor:'rgba(150,150,150,.5)', width: 8, height: 8,borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3}} />}
                 activeDot={<View style={{backgroundColor: '#fff', width: 8, height: 8, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3}} />}
                 paginationStyle={{bottom:5}}
-                height={240}
+                height={230}
                 autoplay={true}
                 loop={false}
                 showsPagination={true}

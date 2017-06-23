@@ -73,7 +73,7 @@ class DrawerNavigationLayout extends React.Component {
     return (
       <View style={styles.header}>
         <StatusBar barStyle="light-content" backgroundColor={t.statusBar}/>
-        {Platform.OS=='android'&&<View style={{height: 20, backgroundColor: t.statusBar}}/>}
+        {Platform.OS=='android'&&<View style={{height: 20}}/>}
         <Grid>
           <Row style={styles.vertical}>
             <Thumbnail style={{marginLeft: 15}} small source={require('../assets/img/account_avatar.png')}/>
@@ -82,7 +82,7 @@ class DrawerNavigationLayout extends React.Component {
           <Row style={{marginTop: 25, paddingBottom: 10}}>
             <Col>
               <Row style={styles.center}>
-                <Icon name="star" style={styles.icon} ios="md-star" />
+                <Icon name="star" style={styles.icon} ios="md-star" active={true} />
                 <Text style={styles.white}>我的收藏</Text>
               </Row>
             </Col>
@@ -125,8 +125,8 @@ class DrawerNavigationLayout extends React.Component {
 
 const styles = {
   header: {
-    paddingTop: Platform.OS=='ios'?30:10,
-    height: Platform.OS=='ios'?120:100,
+    paddingTop: 30,
+    height: 120,
     backgroundColor: t.account
   },
 

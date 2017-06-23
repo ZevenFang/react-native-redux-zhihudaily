@@ -1,5 +1,8 @@
 import React from 'react';
 import {Container, Content, Spinner} from 'native-base';
+import themes from '../utils/themes';
+
+let t = themes['light'];
 
 class Loading extends React.Component {
 
@@ -12,7 +15,7 @@ class Loading extends React.Component {
     return (
       <Container>
         <Content contentContainerStyle={styles.container}>
-          <Spinner color={color||'#808080'}/>
+          <Spinner color={color||t.titleBar}/>
         </Content>
       </Container>
     )

@@ -17,8 +17,7 @@ export default {
   },
   reducers: {
     setLatest(state, {data}){
-      if (state.dates.indexOf(data.date)<0)
-        state.dates.push(data.date);
+      state.dates = [data.date];
       state.list[data.date] = data.stories;
       state.topNews = data.top_stories;
       return {...state};
@@ -64,7 +63,7 @@ export default {
       const {dates} = yield select(state => state.zhihu);
       let {data} = yield call(api.getNewsBefore, dates[dates.length-1]);
       yield put({
-        type: 'setLatest', data
+        type: 'setBefore', data
       });
     },
     *getNews({id}, {put, call}){
