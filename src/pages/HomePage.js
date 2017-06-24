@@ -1,10 +1,12 @@
 import React from 'react';
 import {RefreshControl} from 'react-native';
-import {View, Text, Thumbnail, Container, Content, Body, List, ListItem, Separator} from 'native-base';
+import {View, Text, Thumbnail, Container, Body, List, ListItem, Separator, Icon} from 'native-base';
+import moment from 'moment';
 import Swiper from '../components/Swiper';
 import Loading from '../components/Loading';
 import {connect} from 'dva/mobile';
 import themes from '../utils/themes';
+import Touch from '../components/Touch';
 
 let t = themes['light'];
 
@@ -12,7 +14,12 @@ class HomePage extends React.Component {
 
   static route = {
     navigationBar: {
-      title: '首页'
+      title: '首页',
+      renderRight: (route, prop)=>(
+        <Touch style={styles.navBar}>
+          <Icon style={styles.navIcon} name="notifications" ios="md-notifications"/>
+        </Touch>
+      )
     }
   };
 
@@ -33,15 +40,15 @@ class HomePage extends React.Component {
     })
   };
 
-  _renderRow = (row, sectionID, rowID) =>{
+  _renderRow = (row) =>{
     return (
       row.date?
-        <Separator style={{height: 50}}>
+        <Separator style={{height: 50, backgroundColor: t.background, marginBottom: -6}}>
           <Text style={{color: 'grey', fontSize: 15}}>{row.date}</Text>
         </Separator>:
-        <ListItem key={row.id}>
+        <ListItem style={styles.listItem} onPress={alert}>
           <Body><Text>{row.title}</Text></Body>
-          <Thumbnail square size={100} source={{uri: row.images[0]}} />
+          <Thumbnail square source={{uri: row.images[0]}} style={{marginLeft: 15}} />
         </ListItem>
     )
   };
@@ -59,15 +66,16 @@ class HomePage extends React.Component {
     let data = [];
     if (!isEmpty){
       zhihu.dates.map((d,i)=> {
-        data.push({date: i==0?'今日热闻':d});
+        data.push({date: i==0?'今日热闻':moment(d,'YYYYMMDD').format('MoDo dddd')});
         data = data.concat(zhihu.list[d]);
       })
     }
     return (
       isEmpty?<Loading/>:
       <Container>
-        <View>
-          <List dataArray={data} renderRow={this._renderRow}
+        <View style={{backgroundColor: t.background}}>
+          <List style={{backgroundColor: t.listBg}}
+                dataArray={data} renderRow={this._renderRow}
                 removeClippedSubviews={false}
                 onEndReachedThreshold={1}
                 onEndReached={!isEmpty&&this._onEndReached}
@@ -78,5 +86,27 @@ class HomePage extends React.Component {
     );
   }
 }
+
+let styles = {
+  navBar: {
+    flex: 1,
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  navIcon: {
+    color: 'white'
+  },
+  listItem: {
+    marginLeft: 0,
+    borderLeftColor: t.background,
+    borderTopColor: t.background,
+    borderRightColor: t.background,
+    borderLeftWidth: 8,
+    borderTopWidth: 6,
+    borderRightWidth: 8,
+    borderBottomWidth: 2
+  }
+};
 
 export default connect(({zhihu, loading})=>({zhihu, loading: loading.global}))(HomePage);
