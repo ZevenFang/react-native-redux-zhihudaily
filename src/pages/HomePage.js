@@ -18,10 +18,14 @@ class HomePage extends React.Component {
 
   constructor(props){
     super(props);
-    props.dispatch({
+    this._onRefresh();
+  }
+
+  _onRefresh = () => {
+    this.props.dispatch({
       type: 'zhihu/getLatest'
     })
-  }
+  };
 
   _onEndReached = () => {
     this.props.dispatch({
@@ -30,15 +34,10 @@ class HomePage extends React.Component {
   };
 
   _renderRow = (row, sectionID, rowID) =>{
-    let {zhihu} = this.props;
-    if (rowID==0)
-      return(
-        <Swiper data={zhihu.topNews} onItemPress={alert}/>
-      );
     return (
       row.date?
         <Separator style={{height: 50}}>
-          <Text style={{color: 'grey', fontSize: 15}}>{rowID==1?'今日热闻':row.date}</Text>
+          <Text style={{color: 'grey', fontSize: 15}}>{row.date}</Text>
         </Separator>:
         <ListItem key={row.id}>
           <Body><Text>{row.title}</Text></Body>
@@ -50,10 +49,17 @@ class HomePage extends React.Component {
   render() {
     let {zhihu, loading} = this.props;
     let isEmpty = zhihu.dates.length==0;
+    let refresh = {
+      refreshing: !isEmpty&&loading,
+      onRefresh: this._onRefresh,
+      tintColor: "lightgrey",
+      colors: ['#00a2ed', '#a200ed', '#a2ed00'],
+      progressBackgroundColor: t.background
+    };
     let data = [];
     if (!isEmpty){
-      zhihu.dates.map(d=> {
-        data.push({date: d});
+      zhihu.dates.map((d,i)=> {
+        data.push({date: i==0?'今日热闻':d});
         data = data.concat(zhihu.list[d]);
       })
     }
@@ -61,15 +67,12 @@ class HomePage extends React.Component {
       isEmpty?<Loading/>:
       <Container>
         <View>
-          <List onEndReachedThreshold={1} refreshControl={
-            <RefreshControl
-              refreshing={!isEmpty&&loading}
-              onRefresh={this._onRefresh}
-              tintColor="lightgrey"
-              colors={['#00a2ed', '#a200ed', '#a2ed00']}
-              progressBackgroundColor={t.background}
-            />
-          } dataArray={data} renderRow={this._renderRow} onEndReached={!isEmpty&&this._onEndReached}/>
+          <List dataArray={data} renderRow={this._renderRow}
+                removeClippedSubviews={false}
+                onEndReachedThreshold={1}
+                onEndReached={!isEmpty&&this._onEndReached}
+                renderHeader={()=>(<Swiper data={zhihu.topNews} onItemPress={alert}/>)}
+                refreshControl={<RefreshControl {...refresh} />} />
         </View>
       </Container>
     );

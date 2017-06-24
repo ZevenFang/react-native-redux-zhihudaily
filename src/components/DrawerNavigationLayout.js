@@ -126,7 +126,7 @@ class DrawerNavigationLayout extends React.Component {
 const styles = {
   header: {
     paddingTop: 30,
-    height: 120,
+    height: 140,
     backgroundColor: t.account
   },
 

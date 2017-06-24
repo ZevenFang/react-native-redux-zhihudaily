@@ -3,10 +3,10 @@ import {
   Text,
   StyleSheet,
   View,
-  Image,
-  TouchableHighlight
+  Image
 } from 'react-native';
 import Swiper from 'react-native-swiper';
+import Touch from './Touch';
 
 export default class MySwiper extends Component {
 
@@ -17,16 +17,15 @@ export default class MySwiper extends Component {
   render() {
     let {data, onItemPress} = this.props;
     let slides = [];
-    // console.warn(JSON.stringify(topArticles));
     if (data) {
       data.map((v, k) => {
         slides.push(
-          <TouchableHighlight key={k} style={styles.slide} onPress={() => onItemPress(v, k)}>
+          <Touch key={k} style={styles.slide} onPress={() => onItemPress(v, k)}>
             <Image source={{uri:v.image}} style={styles.slide} resizeMode="cover">
               <View style={styles.shadow}/>
               <Text style={styles.title}>{v.title}</Text>
             </Image>
-          </TouchableHighlight>
+          </Touch>
         )
       });
       return(
