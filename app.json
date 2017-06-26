@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "React Native Starterkit",
-    "icon": "https://s3.amazonaws.com/exp-us-standard/rnplay/app-icon.png",
-    "description": "react-native-starterkit",
+    "name": "React Native Zhihudaily",
+    "icon": "https://cdn.rawgit.com/ZevenFang/assets/96cdbd3e/react-native-redux-zhihudaily/ic_launcher.png",
+    "description": "react-native-zhihudaily",
     "sdkVersion": "17.0.0",
     "ios": {
-      "bundleIdentifier": "com.zeven.rnstarterkit"
+      "bundleIdentifier": "com.zeven.zhihudaily"
     },
     "android": {
-      "package": "com.zeven.rnstarterkit"
+      "package": "com.zeven.zhihudaily"
     }
   }
 }
