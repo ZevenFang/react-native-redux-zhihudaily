@@ -4,9 +4,11 @@ import {View, Text, Thumbnail, Container, Body, List, ListItem, Separator, Icon,
 import moment from 'moment';
 import Swiper from '../components/Swiper';
 import Loading from '../components/Loading';
+import Touch from '../components/Touch';
+import Refresh from '../components/Refresh';
 import {connect} from 'dva/mobile';
 import themes from '../utils/themes';
-import Touch from '../components/Touch';
+import style from '../utils/styles';
 
 let t = themes['light'];
 
@@ -83,13 +85,6 @@ class HomePage extends React.Component {
   render() {
     let {zhihu, loading} = this.props;
     let isEmpty = zhihu.dates.length==0;
-    let refresh = {
-      refreshing: !isEmpty&&loading,
-      onRefresh: this._onRefresh,
-      tintColor: "lightgrey",
-      colors: ['#00a2ed', '#a200ed', '#a2ed00'],
-      progressBackgroundColor: t.background
-    };
     let data = [];
     if (!isEmpty){
       zhihu.dates.map((d,i)=> {
@@ -108,45 +103,26 @@ class HomePage extends React.Component {
                 onEndReachedThreshold={1}
                 onEndReached={!isEmpty&&this._onEndReached}
                 renderHeader={()=>(<Swiper data={zhihu.topNews} onItemPress={alert}/>)}
-                refreshControl={<RefreshControl {...refresh} />} />
+                refreshControl={<Refresh refreshing={!isEmpty&&loading} onRefresh={this._onRefresh}/>} />
         </View>
       </Container>
     );
   }
 }
 
-let styles = {
-  navBar: {
+const styles = {
+  ...style,
+  title:{
+    top:140,
+    marginLeft:20,
+    marginRight:20,
+    color:'white',
+    fontSize:20
+  },
+  slide: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  navBtn: {
-    padding: 15
-  },
-  navIcon: {
-    color: 'white',
-    fontSize: 25
-  },
-  listItem: {
-    marginLeft: 0,
-    borderLeftColor: t.background,
-    borderTopColor: t.background,
-    borderRightColor: t.background,
-    borderLeftWidth: 8,
-    borderTopWidth: 6,
-    borderRightWidth: 8,
-    borderBottomWidth: 2
-  },
-  separator: {
-    height: 50,
-    backgroundColor:
-    t.background,
-    marginBottom: -6
-  },
-  separatorText: {
-    color: 'grey',
-    fontSize: 14
+    height: 220,
+    backgroundColor:'#343434'
   }
 };
 
