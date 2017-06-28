@@ -3,14 +3,15 @@ import * as api from '../services/zhihu-api';
 export default {
   namespace: 'zhihu',
   state: {
+    theme: 'light', //应用主题
     list: {},
     news: {},
     extra: {},
     dates: [],
     topNews: [],
     comments: {
-      long: [],
-      short: []
+      long: {},
+      short: {}
     },
     themesList: [],
     themes: {}
@@ -27,20 +28,20 @@ export default {
       state.list[data.date] = data.stories;
       return {...state};
     },
-    setNews(state, {data}){
-      state.news = data;
+    setNews(state, {id, data}){
+      state.news[id] = data;
       return {...state};
     },
-    setNewsExtra(state, {data}){
-      state.extra = data;
+    setNewsExtra(state, {id, data}){
+      state.extra[id] = data;
       return {...state};
     },
-    setLongComments(state, {data}){
-      state.comments.long = data.comments;
+    setLongComments(state, {id, data}){
+      state.comments.long[id] = data.comments;
       return {...state};
     },
-    setShortComments(state, {data}){
-      state.comments.short = data.comments;
+    setShortComments(state, {id, data}){
+      state.comments.short[id] = data.comments;
       return {...state};
     },
     setThemes(state, {data}){
@@ -67,27 +68,47 @@ export default {
       });
     },
     *getNews({id}, {put, call}){
-      let {data} = yield call(api.getNews, id);
+      const {news} = yield select(state => state.zhihu);
+      let data = {};
+      if (!news[id]){
+        let res = yield call(api.getNews, id);
+        data = res.data;
+      } else data = news[id];
       yield put({
-        type: 'setNews', data
+        type: 'setNews', id, data
       });
     },
     *getNewsExtra({id}, {put, call}){
-      let {data} = yield call(api.getNewsExtra, id);
+      const {extra} = yield select(state => state.zhihu);
+      let data = {};
+      if (!extra[id]){
+        let res = yield call(api.getNewsExtra, id);
+        data = res.data;
+      } else data = extra[id];
       yield put({
-        type: 'setNewsExtra', data
+        type: 'setNewsExtra', id, data
       });
     },
     *getLongComments({id}, {put, call}){
-      let {data} = yield call(api.getLongComments, id);
+      const {comments} = yield select(state => state.zhihu);
+      let data = {};
+      if (!comments.long[id]){
+        let res = yield call(api.getLongComments, id);
+        data = res.data;
+      } else data = comments.long[id];
       yield put({
-        type: 'setLongComments', data
+        type: 'setLongComments', id, data
       });
     },
     *getShortComments({id}, {put, call}){
-      let {data} = yield call(api.getShortComments, id);
+      const {comments} = yield select(state => state.zhihu);
+      let data = {};
+      if (!comments.short[id]){
+        let res = yield call(api.getShortComments, id);
+        data = res.data;
+      } else data = comments.short[id];
       yield put({
-        type: 'setShortComments', data
+        type: 'setShortComments', id, data
       });
     },
     *getThemes(action, {put, call}){
