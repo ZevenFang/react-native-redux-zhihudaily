@@ -3,6 +3,7 @@ import CounterPage from './pages/CounterPage'
 import TodosPage from './pages/TodosPage'
 import AxiosPage from './pages/AxiosPage'
 import ThemePage from './pages/ThemePage'
+import ArticlePage from './pages/ArticlePage'
 import {
   createRouter
 } from '@expo/ex-navigation';
@@ -12,7 +13,8 @@ const Router = createRouter(() => ({
   counter: () => CounterPage,
   todos: () => TodosPage,
   axios: () => AxiosPage,
-  theme: () => ThemePage
+  theme: () => ThemePage,
+  article: () => ArticlePage,
 }));
 
 export default Router;

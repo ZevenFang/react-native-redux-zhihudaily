@@ -15,6 +15,11 @@ export default {
     color: 'white',
     fontSize: 25
   },
+  navText: {
+    color: 'white',
+    marginLeft: 5,
+    alignSelf: 'center'
+  },
   listItem: {
     marginLeft: 0,
     borderLeftColor: t.background,

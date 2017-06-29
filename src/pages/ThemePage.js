@@ -1,11 +1,13 @@
 import React from 'react';
 import {Image} from 'react-native';
-import {View, Text, Container, Content, List, ListItem, Thumbnail, Body} from 'native-base';
+import {View, Text, Container, Content, List, ListItem, Thumbnail, Body, Grid, Icon} from 'native-base';
 import {connect} from 'dva/mobile';
 import Loading from '../components/Loading';
 import Refresh from '../components/Refresh';
 import themes from '../utils/themes';
 import style from '../utils/styles';
+import Router from '../Router';
+import Touch from '../components/Touch';
 
 let t = themes['light'];
 
@@ -16,6 +18,13 @@ class ThemePage extends React.Component {
       title(params) {
         return params.title;
       },
+      renderRight: (route, prop)=>(
+        <Grid style={styles.navBar}>
+          <Touch style={styles.navBtn}>
+            <Icon style={styles.navIcon} name="add-circle" android="ios-add-circle-outline" />
+          </Touch>
+        </Grid>
+      )
     }
   };
 
@@ -36,11 +45,15 @@ class ThemePage extends React.Component {
 
   _renderRow = row =>{
     return (
-      <ListItem style={{...styles.listItem, height: 100}} onPress={alert}>
+      <ListItem style={{...styles.listItem, height: 100}} onPress={()=>this.getNews(row.id)}>
         <Body><Text>{row.title}</Text></Body>
         {row.images&&<Thumbnail square source={{uri: row.images[0]}} style={{marginLeft: 15}} />}
       </ListItem>
     )
+  };
+
+  getNews = (id) => {
+    this.props.navigator.push(Router.getRoute('article', {id}));
   };
 
   render() {

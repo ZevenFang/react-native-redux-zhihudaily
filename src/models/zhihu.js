@@ -67,7 +67,7 @@ export default {
         type: 'setBefore', data
       });
     },
-    *getNews({id}, {put, call}){
+    *getNews({id}, {put, call, select}){
       const {news} = yield select(state => state.zhihu);
       let data = {};
       if (!news[id]){
@@ -78,7 +78,7 @@ export default {
         type: 'setNews', id, data
       });
     },
-    *getNewsExtra({id}, {put, call}){
+    *getNewsExtra({id}, {put, call, select}){
       const {extra} = yield select(state => state.zhihu);
       let data = {};
       if (!extra[id]){
@@ -89,7 +89,7 @@ export default {
         type: 'setNewsExtra', id, data
       });
     },
-    *getLongComments({id}, {put, call}){
+    *getLongComments({id}, {put, call, select}){
       const {comments} = yield select(state => state.zhihu);
       let data = {};
       if (!comments.long[id]){
@@ -100,7 +100,7 @@ export default {
         type: 'setLongComments', id, data
       });
     },
-    *getShortComments({id}, {put, call}){
+    *getShortComments({id}, {put, call, select}){
       const {comments} = yield select(state => state.zhihu);
       let data = {};
       if (!comments.short[id]){

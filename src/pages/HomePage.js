@@ -9,6 +9,7 @@ import Refresh from '../components/Refresh';
 import {connect} from 'dva/mobile';
 import themes from '../utils/themes';
 import style from '../utils/styles';
+import Router from '../Router';
 
 let t = themes['light'];
 
@@ -69,13 +70,17 @@ class HomePage extends React.Component {
       this.props.navigator.updateCurrentRouteParams({title})
   };
 
+  getNews = (id) => {
+    this.props.navigator.push(Router.getRoute('article', {id}));
+  };
+
   _renderRow = row =>{
     return (
       row.date?
         <Separator style={styles.separator} onLayout={e=>this._onItemLayout(e, row.date)}>
           <Text style={styles.separatorText}>{row.date}</Text>
         </Separator>:
-        <ListItem style={styles.listItem} onPress={alert}>
+        <ListItem style={styles.listItem} onPress={()=>this.getNews(row.id)}>
           <Body><Text>{row.title}</Text></Body>
           <Thumbnail square source={{uri: row.images[0]}} style={{marginLeft: 15}} />
         </ListItem>
@@ -102,7 +107,7 @@ class HomePage extends React.Component {
                 onScroll={this._onScroll}
                 onEndReachedThreshold={1}
                 onEndReached={!isEmpty&&this._onEndReached}
-                renderHeader={()=>(<Swiper data={zhihu.topNews} onItemPress={alert}/>)}
+                renderHeader={()=>(<Swiper data={zhihu.topNews} onItemPress={row => this.getNews(row.id)}/>)}
                 refreshControl={<Refresh refreshing={!isEmpty&&loading} onRefresh={this._onRefresh}/>} />
         </View>
       </Container>
