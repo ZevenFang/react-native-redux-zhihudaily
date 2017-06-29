@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {WebView} from 'react-native';
+import {WebView,Platform} from 'react-native';
 import {Container,Content,View,Grid,Icon,Text,Row} from 'native-base';
 import style from '../utils/styles';
 import {connect} from 'dva/mobile';
@@ -21,13 +21,13 @@ class ArticlePage extends Component {
               <Icon style={styles.navIcon} name="star" ios="md-star" active={true}/>
             </Touch>
             <Touch style={styles.navBtn}>
-              <Row>
+              <Row style={Platform.OS==='ios'?{height: 25}:{}}>
                 <Icon style={styles.navIcon} name="text" ios="md-text"/>
                 <Text style={styles.navText}>{extra?extra.comments:'...'}</Text>
               </Row>
             </Touch>
             <Touch style={{...styles.navBtn,paddingLeft: 5}}>
-              <Row>
+              <Row style={{height: 25}}>
                 <Icon style={styles.navIcon} name="thumbs-up" ios="md-thumbs-up"/>
                 <Text style={styles.navText}>{extra?extra.popularity:'...'}</Text>
               </Row>
@@ -44,14 +44,16 @@ class ArticlePage extends Component {
   }
 
   componentDidMount(){
-    this.props.dispatch({
-      type: 'zhihu/getNews',
-      id: this.id
-    });
-    this.props.dispatch({
-      type: 'zhihu/getNewsExtra',
-      id: this.id
-    })
+    setTimeout(()=>{
+      this.props.dispatch({
+        type: 'zhihu/getNews',
+        id: this.id
+      });
+      this.props.dispatch({
+        type: 'zhihu/getNewsExtra',
+        id: this.id
+      })
+    },1000)
   }
 
   componentDidUpdate() {
@@ -98,4 +100,4 @@ const styles = {
   ...style
 };
 
-export default connect(({zhihu,loading})=>({zhihu,loading:loading.global}))(ArticlePage)
+export default connect(({zhihu})=>({zhihu}))(ArticlePage)

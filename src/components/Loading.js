@@ -1,4 +1,5 @@
 import React from 'react';
+import {Platform} from 'react-native';
 import {Container, Content, Spinner} from 'native-base';
 import themes from '../utils/themes';
 
@@ -15,7 +16,7 @@ class Loading extends React.Component {
     return (
       <Container>
         <Content contentContainerStyle={styles.container}>
-          <Spinner color={color||t.titleBar}/>
+          <Spinner color={color||(Platform.OS==='ios'?'lightgrey':t.titleBar)}/>
         </Content>
       </Container>
     )

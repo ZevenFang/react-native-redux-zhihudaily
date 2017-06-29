@@ -37,7 +37,8 @@ class HomePage extends React.Component {
 
   constructor(props){
     super(props);
-    this._onRefresh();
+    if (props.zhihu.dates.length === 0)
+      this._onRefresh();
   }
 
   _onRefresh = () => {
